@@ -1,2 +1,248 @@
-asdfasdfasdf
-aafsdfasdfasdf
+Global SchoolName As Variant
+Global Years As Integer
+
+' -------------------------------------------------------------------
+
+Sub createcalendar()
+    
+    Dim SheetCount As Integer
+    Dim Months As Worksheet
+    Dim MonthName As Variant
+    Dim MonthNames(1 To 11) As String
+    Dim DayNames(1 To 7) As String
+    Dim oRange As Range
+    Dim Repeat As Boolean
+    Dim Weeks As Integer
+    Dim Days As Integer
+    Dim DayCount As Integer
+    Dim MyDate As Variant
+    Dim iMonth As Integer
+    Dim StartDay As Integer
+    Dim sheetname As String
+    
+    Repeat = False
+    iMonth = 0
+    DayCount = 0
+    Application.ScreenUpdating = False
+    On Error GoTo SumTingWong
+    
+    MonthNames(1) = "Août"
+    MonthNames(2) = "Septembre"
+    MonthNames(3) = "Octobre"
+    MonthNames(4) = "Novembre"
+    MonthNames(5) = "Décembre"
+    MonthNames(6) = "Janvier"
+    MonthNames(7) = "Février"
+    MonthNames(8) = "Mars"
+    MonthNames(9) = "Avril"
+    MonthNames(10) = "Mai"
+    MonthNames(11) = "Juin"
+    
+    DayNames(1) = "Dimanche"
+    DayNames(2) = "Lundi"
+    DayNames(3) = "Mardi"
+    DayNames(4) = "Mercredi"
+    DayNames(5) = "Jeudi"
+    DayNames(6) = "Vendredi"
+    DayNames(7) = "Samedi"
+
+    For SheetCount = 1 To 11
+        If SheetCount < 6 Then
+            iMonth = SheetCount + 7
+        Else
+            iMonth = SheetCount - 5
+            If iMonth = 1 Then
+                Years = Years + 1
+            End If
+        End If
+        sheetname = MonthNames(SheetCount) & " " & CStr(Years)
+        Set Months = Worksheets.Add(after:=Worksheets(Worksheets.Count))
+        With Months
+            DayCount = 0
+            .Name = sheetname
+            
+            .Range("A1:B1").Merge
+            .Range("A1").Value = "Logo, à venir"
+            
+            With .Range("C1:F1")
+                .Merge
+                .Font.Bold = True
+            End With
+            .Range("C1").Value = SchoolName
+            .Range("C1").Font.Size = 12
+            
+            .Range("C2:F2").Merge
+            .Range("C2").Value = "Calendrier Scolaire"
+            
+            .Range("A3:F3").Merge
+            
+            With .Range("G1:N5")
+                .Merge
+                .Font.ColorIndex = 32
+            End With
+            .Range("G1").Value = Months.Name
+            .Range("G1").Font.Size = 36
+            
+            With Range("A6:N6")
+                .Interior.ColorIndex = 32
+                .Font.ColorIndex = 2
+            End With
+            
+            For Days = 1 To 7
+                .Range(.Cells(6, 2 * Days - 1), .Cells(6, 2 * Days)).Merge
+                .Cells(6, 2 * Days - 1).Value = DayNames(Days)
+            Next Days
+            
+            MyDate = DateSerial(Years, (SheetCount + 7) Mod 12 + 1, 0)
+            For Weeks = 1 To 6
+                If Weeks = 1 Then
+                    StartDay = Weekday(DateSerial(Years, iMonth, 1))
+                Else
+                    StartDay = 1
+                End If
+                For Days = StartDay To 7
+                    
+                    With .Range(.Cells(6 * Weeks + 1, 2 * Days - 1), .Cells(6 * Weeks + 6, 2 * Days)).Borders
+                        .LineStyle = xlContinuous
+                        .Weight = xlThin
+                        .ColorIndex = 0
+                        .TintAndShade = 0
+                    End With
+                    
+                    DayCount = DayCount + 1
+                    
+                    With .Cells(6 * Weeks + 1, 2 * Days - 1)
+                        .Value = CStr(DayCount)
+                        .Font.Bold = True
+                    End With
+                    
+                    If Days = 1 Or Days = 7 Then
+                        .Cells(6 * Weeks + 1, 2 * Days).Value = "----"
+                    Else
+                        .Cells(6 * Weeks + 1, 2 * Days).Value = IsHoliday(DateSerial(Years, iMonth, DayCount))
+                    End If
+                    
+                    If DayCount = Day(MyDate) Then
+                        Exit For
+                    End If
+                Next Days
+                If DayCount = Day(MyDate) Then
+                    Exit For
+                End If
+            Next Weeks
+        End With
+    Next SheetCount
+    
+    Application.ScreenUpdating = True
+    
+SumTingWong:
+    
+End Sub
+
+' -------------------------------------------------------------------
+
+Sub showUserForm()
+    UserForm1.Show
+End Sub
+
+' -------------------------------------------------------------------
+
+Sub clearall()
+    Dim i As Integer
+    Dim x As Integer
+    x = Worksheets.Count
+    For i = 4 To x
+        Worksheets(4).Delete
+    Next i
+End Sub
+
+' -------------------------------------------------------------------
+
+Sub schoolday()
+    
+    Dim row As Integer
+    Dim col As Integer
+    Dim DayCount As Integer
+    Dim SheetCount As Integer
+    Dim Months As Worksheet
+    Dim Horaire As Worksheet
+    
+    DayCount = 1
+    Set Horaire = Worksheets("Horaire")
+    
+    For SheetCount = 3 To 14
+        Set Months = Worksheets(SheetCount)
+        For row = 7 To 42 Step 6
+            For col = 4 To 12 Step 2
+                If Months.Cells(row, col).Text = "" And Months.Cells(row, col - 1).Text <> "" Then
+                    Months.Cells(row, col).Value = "Jour " & CStr(DayCount)
+                    
+                    Horaire.Range(Horaire.Cells(2, 2 + (DayCount - 1) * 2), Horaire.Cells(5, 3 + (DayCount - 1) * 2)).Copy _
+                    Destination:=Months.Range(Months.Cells(row + 1, col - 1), Months.Cells(row + 5, col))
+                    
+                    DayCount = DayCount + 1
+                    If DayCount = 10 Then
+                        DayCount = 1
+                    End If
+                    
+                    Months.UsedRange.Columns.AutoFit
+                    Months.UsedRange.Rows.AutoFit
+                End If
+            Next col
+        Next row
+    Next SheetCount
+    
+End Sub
+
+Function IsHoliday(LngDate As Date)
+
+Dim RngFind As Range
+Dim Description As String
+
+Set RngFind = Worksheets("Congés").Columns(1).Find(LngDate)
+
+Description = ""
+
+With Worksheets("Congés")
+    If Not RngFind Is Nothing Then
+        Description = .Cells(RngFind.row, RngFind.Column + 1).Value
+    ElseIf LngDate < .Cells(1, 6).Value Or LngDate > .Cells(2, 6) Then
+        Description = "Fin des jours de classe"
+    End If
+End With
+IsHoliday = Description
+
+End Function
+
+' -------------------------------------------------------------------
+
+'Function CSVExport()
+'
+'     Dim CSVsheet As Worksheet
+'     Dim row As Integer
+'     Dim col As Integer
+'     Dim headers(1 To 9) As String
+'     
+'     headers(1) = "Subject"
+'     headers(2) = "Start Date"
+'     headers(3) = "Start Time"
+'     headers(4) = "End Date"
+'     headers(5) = "End Time"
+'     headers(6) = "All Day Event"
+'     headers(7) = "Description"
+'     headers(8) = "Location"
+'     headers(9) = "Private"
+'     
+'     CSVsheet = Worksheets.Add(after:=Worksheets(Worksheets.Count))
+'     
+'     With CSVsheet
+'        .Name = "CSV Export"
+'        
+'        For col = 1 To 9
+'            .Cells(1, col).Value = headers(col)
+'            
+'        Next col
+'     End With
+'
+'End Function
+
