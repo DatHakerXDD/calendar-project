@@ -1,0 +1,4 @@
+The exporting of each day does not seem to be accepted : Google Calendar seems to
+reject the lines where the full days (i.e. "Jour 2" or "Jour 5"), and does not import them
+
+Might fix this in the future
