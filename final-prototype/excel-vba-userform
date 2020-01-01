@@ -1,0 +1,46 @@
+Dim confirm As Boolean
+
+'-------------------------------------------------------
+
+Private Sub asdf_Click()
+    UserForm1.Hide
+End Sub
+
+Private Sub confirmbox_Click()
+    generatebutton.Enabled = confirmbox.Value
+End Sub
+
+'-------------------------------------------------------
+
+Private Sub generatebutton_Click()
+    
+    If confirmbox.Value = True Then
+        If yearbox.Text <> CStr(CInt(yearbox.Text)) Then
+            Err.Raise Number:=vbObjectError + 45, _
+                Description:="Year input is not valid!"
+            End
+        End If
+        If CInt(yearbox.Text) > 2150 Then
+            Err.Raise Number:=vbObjectError + 46, _
+                Description:="Year input is too high!"
+            End
+        End If
+        If CInt(yearbox.Text) < 1900 Then
+            Err.Raise Number:=vbObjectError + 46, _
+                Description:="Year input is too low!"
+            End
+        End If
+        SchoolName = namebox.Text
+        Years = CInt(yearbox.Text)
+        Call createcalendar
+        Call schoolday
+        GoogleExport.Enabled = True
+    End If
+    
+End Sub
+
+'-------------------------------------------------------
+
+Private Sub GoogleExport_Click()
+        Call createCSV
+End Sub
