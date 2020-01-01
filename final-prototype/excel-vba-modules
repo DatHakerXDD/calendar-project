@@ -1,0 +1,392 @@
+Global SchoolName As Variant
+Global Years As Integer
+
+'-----------------------------------------------------------------
+
+Sub createcalendar()
+    
+    Dim sheetcount As Integer
+    Dim Months As Worksheet
+    Dim MonthName As Variant
+    Dim MonthNames(1 To 11) As String
+    Dim DayNames(1 To 7) As String
+    Dim oRange As Range
+    Dim Repeat As Boolean
+    Dim Weeks As Integer
+    Dim Days As Integer
+    Dim DayCount As Integer
+    Dim MyDate As Variant
+    Dim iMonth As Integer
+    Dim StartDay As Integer
+    Dim sheetname As String
+    Dim headers(1 To 9) As String
+    Dim holiday As String
+    Dim today As Date
+    Dim eventcounter As Integer
+    Dim CSVsheet As Worksheet
+    Dim col As Integer
+    
+    Repeat = False
+    iMonth = 0
+    DayCount = 0
+    Application.ScreenUpdating = False
+    On Error GoTo SumTingWong
+    
+    headers(1) = "Subject"
+    headers(2) = "Start Date"
+    headers(3) = "End Date"
+    headers(4) = "All Day Event"
+    headers(5) = "Start Time"
+    headers(6) = "End Time"
+    headers(7) = "Description"
+    headers(8) = "Location"
+    headers(9) = "Private"
+    
+    MonthNames(1) = "Août"
+    MonthNames(2) = "Septembre"
+    MonthNames(3) = "Octobre"
+    MonthNames(4) = "Novembre"
+    MonthNames(5) = "Décembre"
+    MonthNames(6) = "Janvier"
+    MonthNames(7) = "Février"
+    MonthNames(8) = "Mars"
+    MonthNames(9) = "Avril"
+    MonthNames(10) = "Mai"
+    MonthNames(11) = "Juin"
+    
+    DayNames(1) = "Dimanche"
+    DayNames(2) = "Lundi"
+    DayNames(3) = "Mardi"
+    DayNames(4) = "Mercredi"
+    DayNames(5) = "Jeudi"
+    DayNames(6) = "Vendredi"
+    DayNames(7) = "Samedi"
+
+    For sheetcount = 1 To 11
+        If sheetcount < 6 Then
+            iMonth = sheetcount + 7
+        Else
+            iMonth = sheetcount - 5
+            If iMonth = 1 Then
+                Years = Years + 1
+            End If
+        End If
+        sheetname = MonthNames(sheetcount) & " " & CStr(Years)
+        Set Months = Worksheets.Add(After:=Worksheets(Worksheets.Count))
+        With Months
+            eventcounter = 0
+            For col = 1 To 9
+                .Cells(1, col + 16).Value = headers(col)
+            Next col
+            
+            DayCount = 0
+            .Name = sheetname
+            
+            .Range("A1:B1").Merge
+            .Range("A1").Value = "Logo, à venir"
+            
+            With .Range("C1:F1")
+                .Merge
+                .Font.Bold = True
+            End With
+            .Range("C1").Value = SchoolName
+            .Range("C1").Font.Size = 12
+            
+            .Range("C2:F2").Merge
+            .Range("C2").Value = "Calendrier Scolaire"
+            
+            .Range("A3:F3").Merge
+            
+            With .Range("G1:N5")
+                .Merge
+                .Font.ColorIndex = 32
+            End With
+            .Range("G1").Value = Months.Name
+            .Range("G1").Font.Size = 36
+            
+            With Range("A6:N6")
+                .Interior.ColorIndex = 32
+                .Font.ColorIndex = 2
+            End With
+            
+            For Days = 1 To 7
+                .Range(.Cells(6, 2 * Days - 1), .Cells(6, 2 * Days)).Merge
+                .Cells(6, 2 * Days - 1).Value = DayNames(Days)
+            Next Days
+            
+            MyDate = DateSerial(Years, (sheetcount + 7) Mod 12 + 1, 0)
+            For Weeks = 1 To 6
+                If Weeks = 1 Then
+                    StartDay = Weekday(DateSerial(Years, iMonth, 1))
+                Else
+                    StartDay = 1
+                End If
+                For Days = StartDay To 7
+                    
+                    With .Range(.Cells(6 * Weeks + 1, 2 * Days - 1), .Cells(6 * Weeks + 6, 2 * Days)).Borders
+                        .LineStyle = xlContinuous
+                        .Weight = xlThin
+                        .ColorIndex = 0
+                        .TintAndShade = 0
+                    End With
+                    
+                    DayCount = DayCount + 1
+                    
+                    With .Cells(6 * Weeks + 1, 2 * Days - 1)
+                        .Value = DateSerial(Years, iMonth, DayCount)
+                        .Font.Bold = True
+                    End With
+                    
+                    If Days = 1 Or Days = 7 Then
+                        .Cells(6 * Weeks + 1, 2 * Days).Value = "----"
+                    Else
+                        today = DateSerial(Years, iMonth, DayCount)
+                        holiday = IsHoliday(today)
+                        
+                        If holiday <> "" Then
+                            .Cells(6 * Weeks + 1, 2 * Days).Value = holiday
+                            .Cells(2 + eventcounter, 17).Value = holiday
+                            .Cells(2 + eventcounter, 18).Value = CStr(today)
+                            .Cells(2 + eventcounter, 24).Value = "Maison"
+                            .Cells(2 + eventcounter, 25).Value = True
+                            
+                            If holiday = "Demie journée pédagogique" Then
+                                .Cells(2 + eventcounter, 20).Value = "False"
+                                .Cells(2 + eventcounter, 21).Value = "8:00 AM"
+                                .Cells(2 + eventcounter, 22).Value = "10:38 AM"
+                                .Cells(2 + eventcounter, 23).Value = "Demie journée d'école"
+                            ElseIf holiday <> "" Then
+                                .Cells(2 + eventcounter, 20).Value = "True"
+                                .Cells(2 + eventcounter, 23).Value = "Pas d'école"
+                            End If
+                            eventcounter = eventcounter + 1
+                        End If
+                    End If
+                    
+                    If DayCount = Day(MyDate) Then
+                        Exit For
+                    End If
+                Next Days
+                If DayCount = Day(MyDate) Then
+                    .Cells(2 + eventcounter, 17).Value = "asdf"
+                    Exit For
+                End If
+            Next Weeks
+        End With
+    Next sheetcount
+    Application.ScreenUpdating = True
+    
+    While False
+SumTingWong:
+        With Worksheets(Worksheets.Count).Range(Cells(1, 1), Cells(9, 9))
+            .Merge
+            .Interior.ColorIndex = 3
+            .Value = "Sum Ting Went Wong"
+            .HorizontalAlignment = xlCenter
+            .VerticalAlignment = xlCenter
+        End With
+    Wend
+    
+End Sub
+
+'-----------------------------------------------------------------
+
+Sub showUserForm()
+    UserForm1.Show
+End Sub
+
+'-----------------------------------------------------------------
+
+Sub clearall()
+    Dim i As Integer
+    Dim x As Integer
+    x = Worksheets.Count
+    For i = 4 To x
+        Worksheets(4).Delete
+    Next i
+End Sub
+
+'-----------------------------------------------------------------
+
+Sub schoolday()
+    
+    Dim iRows As Integer
+    Dim col As Integer
+    Dim DayCount As Integer
+    Dim sheetcount As Integer
+    Dim Months As Worksheet
+    Dim Horaire As Worksheet
+    Dim finder As Range
+    Dim eventcounter As Integer
+    Dim i As Integer
+    
+    DayCount = 1
+    Set Horaire = Worksheets("Horaire")
+    
+    Application.ScreenUpdating = False
+    
+    For sheetcount = 4 To 14
+        Set Months = Worksheets(sheetcount)
+        Set finder = Months.Columns(17).Find("asdf")
+        If Not finder Is Nothing Then
+            eventcounter = finder.row
+        End If
+        
+        Months.Cells(finder.row, finder.Column).Clear
+        
+        For iRows = 7 To 42 Step 6
+            For col = 4 To 12 Step 2
+                If Months.Cells(iRows, col).Text = "" And Months.Cells(iRows, col - 1).Text <> "" Then
+                    Months.Cells(iRows, col).Value = "Jour " & CStr(DayCount)
+                    
+                    Horaire.Range(Horaire.Cells(2, 2 + (DayCount - 1) * 2), Horaire.Cells(5, 3 + (DayCount - 1) * 2)).Copy _
+                    Destination:=Months.Range(Months.Cells(iRows + 1, col - 1), Months.Cells(iRows + 5, col))
+                    
+                    With Months
+                        
+                        .Range(.Cells(iRows + 1, col - 1), .Cells(iRows + 4, col - 1)).Copy _
+                        Destination:=.Range(.Cells(eventcounter, 24), .Cells(eventcounter + 3, 24))
+                        
+                        .Range(.Cells(iRows + 1, col), .Cells(iRows + 4, col)).Copy _
+                        Destination:=.Range(.Cells(eventcounter, 17), .Cells(eventcounter + 3, 17))
+                        
+                        For i = 0 To 3
+                            .Cells(eventcounter + i, 20).Value = "False"
+                            .Cells(eventcounter + i, 25).Value = "True"
+                            .Cells(eventcounter + i, 18).Value = .Cells(iRows, col - 1).Value
+                        Next i
+                        
+                        .Cells(iRows, col - 1).Value = CStr(Day(CDate(.Cells(iRows, col - 1).Value)))
+                        
+                        .Cells(eventcounter + 4, 17).Value = .Cells(iRows, col).Value
+                        .Cells(eventcounter + 4, 18).Value = .Cells(iRows, col - 1).Value
+                        .Cells(eventcounter + 4, 20).Value = "True"
+                        .Cells(eventcounter + 4, 23).Value = .Cells(iRows + 1, col) & "*" & _
+                                                             .Cells(iRows + 2, col) & "*" & _
+                                                             .Cells(iRows + 3, col) & "*" & _
+                                                             .Cells(iRows + 4, col)
+                        .Cells(eventcounter + 4, 24).Value = SchoolName
+                        .Cells(eventcounter + 4, 25).Value = "True"
+                        
+                    End With
+                    
+                    Horaire.Range(Horaire.Cells(8, 2), Horaire.Cells(12, 3)).Copy _
+                    Destination:=Months.Range(Months.Cells(eventcounter, 21), Months.Cells(eventcounter + 3, 22))
+                    
+                    DayCount = DayCount + 1
+                    If DayCount = 10 Then
+                        DayCount = 1
+                    End If
+                    
+                    Months.UsedRange.Columns.AutoFit
+                    Months.UsedRange.rows.AutoFit
+                    
+                    eventcounter = eventcounter + 5
+                End If
+            Next col
+        Next iRows
+        Months.Cells(eventcounter, 17).Value = "asdf"
+    Next sheetcount
+    
+    Application.ScreenUpdating = True
+    
+End Sub
+
+'-----------------------------------------------------------------
+
+Function IsHoliday(LngDate As Date)
+
+Dim RngFind As Range
+Dim Description As String
+
+Set RngFind = Worksheets("Congés").Columns(1).Find(LngDate)
+
+Description = ""
+
+With Worksheets("Congés")
+    If Not RngFind Is Nothing Then
+        Description = .Cells(RngFind.row, RngFind.Column + 1).Value
+    ElseIf LngDate < .Cells(1, 6).Value Or LngDate > .Cells(2, 6) Then
+        Description = "Fin des jours de classe"
+    End If
+End With
+IsHoliday = Description
+
+End Function
+
+'-----------------------------------------------------------------
+
+Sub createCSV()
+    Dim headers2(1 To 9) As String
+    Dim i As Integer
+    Dim wb As Workbook
+    Dim ws As Worksheet
+    Dim finder As Range
+    Dim LastRow As Integer
+    Dim periods() As String
+    
+    Set wb = ActiveWorkbook
+    Set ws = Worksheets.Add(After:=Worksheets(Worksheets.Count))
+    eventrow = 2
+    ws.Name = "CSV Export"
+    Application.ScreenUpdating = False
+    
+    headers2(1) = "Subject"
+    headers2(2) = "Start Date"
+    headers2(3) = "End Date"
+    headers2(4) = "All Day Event"
+    headers2(5) = "Start Time"
+    headers2(6) = "End Time"
+    headers2(7) = "Description"
+    headers2(8) = "Location"
+    headers2(9) = "Private"
+    
+    For i = 1 To 9
+        ws.Cells(1, i).Value = headers2(i)
+    Next i
+    
+    For i = 4 To 14
+        LastRow = Cells(ws.Range("A1").SpecialCells(xlCellTypeLastCell).row, 1).Offset(1, 0).End(xlUp).row
+        Set finder = Worksheets(i).Columns(17).Find("asdf")
+        Worksheets(i).Range(Worksheets(i).Cells(2, 17), Worksheets(i).Cells(finder.row - 1, 25)).Copy _
+        Destination:=ws.Range(ws.Cells(LastRow + 1, 1), ws.Cells(LastRow + 2 + finder.row, 9))
+    Next i
+    
+    LastRow = Cells(ws.Range("A1").SpecialCells(xlCellTypeLastCell).row, 1).Offset(1, 0).End(xlUp).row
+    
+    ws.Columns(3).EntireColumn.Delete
+    ws.Columns(3).NumberFormat = "@"
+    ws.Columns(8).NumberFormat = "@"
+    For i = 1 To LastRow
+        If ws.Cells(i, 3).Value = "TRUE" Then
+            ws.Cells(i, 3).Value = "True"
+        End If
+        If ws.Cells(i, 3).Value = "FALSE" Then
+            ws.Cells(i, 3).Value = "False"
+        End If
+        If ws.Cells(i, 8).Value = "TRUE" Then
+            ws.Cells(i, 8).Value = "True"
+        End If
+        If ws.Cells(i, 8).Value = "FALSE" Then
+            ws.Cells(i, 8).Value = "False"
+        End If
+    Next i
+    ws.Columns(2).NumberFormat = "mm/dd/yyyy"
+    
+    For i = 1 To LastRow
+        If InStr(ws.Cells(i, 1).Value, "Jour") > 0 Then
+            periods = Split(ws.Cells(i, 6).Value, "*")
+            ws.Cells(i, 6).Value = ""
+            For Each thing In periods
+                ws.Cells(i, 6).Value = ws.Cells(i, 6).Value & thing & ", "
+            Next thing
+            ws.Cells(i, 6).Value = Left(ws.Cells(i, 6).Value, Len(ws.Cells(i, 6).Value) - 1)
+            ws.Cells(i, 6).Value = Left(ws.Cells(i, 6).Value, Len(ws.Cells(i, 6).Value) - 1)
+        End If
+    Next i
+    
+    ws.UsedRange.Columns.AutoFit
+    ws.UsedRange.rows.AutoFit
+    
+    Application.ScreenUpdating = True
+End Sub
