@@ -1,3 +1,5 @@
 Fixes :
 - Whole day events are now working
 - Periods now have end times
+
+* Exporting for ICal has been discontinued, will only add in the main app project
