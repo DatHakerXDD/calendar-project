@@ -1,1 +1,8 @@
-
+<resources>
+    <string name="app_name">Calendar App</string>
+    <string name="school_name_box_hint">School Name</string>
+    <string name="year_box_hint">School Year</string>
+    <string name="nine_day_switch_text">9 Day Cycle</string>
+    <string name="year_box_autofill_hint">year</string>
+    <string name="school_name_box_autofill_hint">school name</string>
+</resources>
