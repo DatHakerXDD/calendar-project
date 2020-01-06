@@ -8,28 +8,28 @@
     tools:context=".MainActivity">
 
     <EditText
-        android:id="@+id/schoolNameBox"
+        android:id="@+id/schoolNameEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/school_name_box_hint"
         android:inputType="textPersonName"
-        android:autofillHints="@string/school_name_box_autofill_hint"
+        android:importantForAutofill="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049" />
+        app:layout_constraintVertical_bias="0.049"/>
 
     <EditText
-        android:id="@+id/schoolYearBox"
+        android:id="@+id/schoolYearEt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/year_box_hint"
         android:inputType="number"
-        android:autofillHints="@string/year_box_autofill_hint"
+        android:importantForAutofill="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -38,7 +38,7 @@
         app:layout_constraintVertical_bias="0.126" />
 
     <Switch
-        android:id="@+id/nineDaySwitch"
+        android:id="@+id/nineDaySw"
         android:layout_width="95dp"
         android:layout_height="51dp"
         android:text="@string/nine_day_switch_text"
@@ -48,5 +48,310 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.088" />
+
+
+    <Button
+        android:id="@+id/mondayBtn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/monday_button_text"
+        android:visibility="visible"
+        android:clickable="true"
+        android:focusable="true"
+        android:enabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+
+    <Button
+        android:id="@+id/tuesdayBtn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/tuesday_button_text"
+        android:visibility="visible"
+        android:clickable="true"
+        android:focusable="true"
+        android:enabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/wednesdayBtn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/wednesday_button_text"
+        android:visibility="visible"
+        android:clickable="true"
+        android:focusable="true"
+        android:enabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/thursdayBtn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/thursday_button_text"
+        android:visibility="visible"
+        android:clickable="true"
+        android:focusable="true"
+        android:enabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/fridayBtn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/friday_button_text"
+        android:visibility="visible"
+        android:clickable="true"
+        android:focusable="true"
+        android:enabled="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/day1Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day1_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+
+    <Button
+        android:id="@+id/day2Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day2_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.27"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/day3Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day3_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/day4Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day4_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.717"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/day5Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day5_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.94"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.213" />
+
+    <Button
+        android:id="@+id/day6Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day6_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.157"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.268" />
+
+    <Button
+        android:id="@+id/day7Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day7_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.38"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.268" />
+
+    <Button
+        android:id="@+id/day8Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day8_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.607"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.268" />
+
+    <Button
+        android:id="@+id/day9Btn"
+        android:layout_width="@dimen/day_button_width"
+        android:layout_height="@dimen/day_button_height"
+        android:text="@string/day9_button_text"
+        android:visibility="gone"
+        android:clickable="false"
+        android:focusable="false"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.83"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.268" />
+
+    <Button
+        android:id="@+id/newPeriodBtn"
+        android:layout_width="@dimen/create_new_period_button_width"
+        android:layout_height="@dimen/create_new_period_button_height"
+        android:text="@string/create_new_period_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.357" />
+
+    <Spinner
+        android:id="@+id/period1spn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/period_spinner_side_margin"
+        android:layout_marginRight="@dimen/period_spinner_side_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.465" />
+
+    <Spinner
+        android:id="@+id/period2spn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/period_spinner_side_margin"
+        android:layout_marginRight="@dimen/period_spinner_side_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.716" />
+
+    <Spinner
+        android:id="@+id/period3spn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/period_spinner_side_margin"
+        android:layout_marginRight="@dimen/period_spinner_side_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.801" />
+
+    <Spinner
+        android:id="@+id/period4spn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/period_spinner_side_margin"
+        android:layout_marginRight="@dimen/period_spinner_side_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.632" />
+
+    <Spinner
+        android:id="@+id/period5spn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/period_spinner_side_margin"
+        android:layout_marginRight="@dimen/period_spinner_side_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.545" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
