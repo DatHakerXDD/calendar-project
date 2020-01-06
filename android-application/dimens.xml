@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="day_button_width">75dp</dimen>
+    <dimen name="day_button_height">38dp</dimen>
+    <dimen name="create_new_period_button_width">182dp</dimen>
+    <dimen name="create_new_period_button_height">56dp</dimen>
+    <dimen name="new_period_alert_title_text_size">35sp</dimen>
+    <dimen name="new_period_general_margin">18dp</dimen>
+    <dimen name="new_period_create_period_button_left_margin">200dp</dimen>
+    <dimen name="new_period_create_period_button_width">175dp</dimen>
+    <dimen name="new_period_confirm_checkbox_left_margin">30dp</dimen>
+    <dimen name="new_period_confirm_checkbox_top_margin">-42dp</dimen>
+    <dimen name="new_period_confirm_checkbox_width">145dp</dimen>
+    <dimen name="new_period_alert_title_top_margin">175dp</dimen>
+    <dimen name="period_spinner_side_margin">15dp</dimen>
+</resources>
