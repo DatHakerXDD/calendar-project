@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--    this is a new layout, to be added into the layout folder,-->
+    <!--    for the creation of a new period as alert dialog-->
+
+    <TextView
+        android:id="@+id/newPeriodTitleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/new_period_alert_title"
+        android:textSize="@dimen/new_period_alert_title_text_size"
+        android:layout_marginTop="@dimen/new_period_alert_title_top_margin"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/periodNameEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/new_period_period_name_box_hint"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/new_period_general_margin"
+        android:layout_marginRight="@dimen/new_period_general_margin"
+        android:layout_marginTop="@dimen/new_period_general_margin"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+
+
+    <EditText
+        android:id="@+id/teacherEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/new_period_teacher_box_hint"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/new_period_general_margin"
+        android:layout_marginRight="@dimen/new_period_general_margin"
+        android:layout_marginTop="@dimen/new_period_general_margin"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+
+
+    <EditText
+        android:id="@+id/classroomRoomEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/new_period_classroom_room_box_hint"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/new_period_general_margin"
+        android:layout_marginRight="@dimen/new_period_general_margin"
+        android:layout_marginTop="@dimen/new_period_general_margin"
+        android:inputType="text"
+        android:importantForAutofill="no"  />
+
+
+    <EditText
+        android:id="@+id/groupEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/new_period_group_box_hint"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/new_period_general_margin"
+        android:layout_marginRight="@dimen/new_period_general_margin"
+        android:layout_marginTop="@dimen/new_period_general_margin"
+        android:inputType="text"
+        android:importantForAutofill="no"  />
+
+    <Button
+        android:id="@+id/newPeriodCreateBtn"
+        android:layout_width="@dimen/new_period_create_period_button_width"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_marginStart="@dimen/new_period_create_period_button_left_margin"
+        android:layout_marginTop="@dimen/new_period_general_margin"
+        android:text="@string/new_period_create_period_button_text" />
+
+    <CheckBox
+        android:id="@+id/newPeriodConfirmChk"
+        android:layout_width="@dimen/new_period_confirm_checkbox_width"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/new_period_confirm_checkbox_left_margin"
+        android:layout_marginTop="@dimen/new_period_confirm_checkbox_top_margin"
+        android:text="@string/new_period_confirm_checkbox_text" />
+
+
+</LinearLayout>
