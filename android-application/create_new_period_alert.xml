@@ -83,7 +83,7 @@
 
     <CheckBox
         android:id="@+id/newPeriodConfirmChk"
-        android:layout_width="@dimen/new_period_confirm_checkbox_width"
+        android:layout_width="105dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/new_period_confirm_checkbox_left_margin"
         android:layout_marginTop="@dimen/new_period_confirm_checkbox_top_margin"
