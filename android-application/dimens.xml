@@ -6,11 +6,17 @@
     <dimen name="create_new_period_button_height">56dp</dimen>
     <dimen name="new_period_alert_title_text_size">35sp</dimen>
     <dimen name="new_period_general_margin">18dp</dimen>
-    <dimen name="new_period_create_period_button_left_margin">200dp</dimen>
+    <dimen name="new_period_create_period_button_left_margin">180dp</dimen>
     <dimen name="new_period_create_period_button_width">175dp</dimen>
-    <dimen name="new_period_confirm_checkbox_left_margin">30dp</dimen>
+    <dimen name="new_period_confirm_checkbox_left_margin">35dp</dimen>
     <dimen name="new_period_confirm_checkbox_top_margin">-42dp</dimen>
     <dimen name="new_period_confirm_checkbox_width">145dp</dimen>
-    <dimen name="new_period_alert_title_top_margin">175dp</dimen>
+    <dimen name="new_period_alert_title_top_margin">15dp</dimen>
     <dimen name="period_spinner_side_margin">15dp</dimen>
+    <dimen name="confirm_box_height">94dp</dimen>
+    <dimen name="new_holiday_alert_title_top_margin">190dp</dimen>
+    <dimen name="new_holiday_general_margin">18dp</dimen>
+    <dimen name="new_holiday_create_holiday_button_side_margin">35dp</dimen>
+    <dimen name="add_holiday_button_width">113dp</dimen>
+    <dimen name="add_period_button_height">52dp</dimen>
 </resources>
