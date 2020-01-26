@@ -27,4 +27,10 @@
     <string name="new_period_group_box_hint">Group (optional)</string>
     <string name="new_period_create_period_button_text">Create Period</string>
     <string name="new_period_confirm_checkbox_text">Confirm</string>
+    <string name="next_1_button_text">Next…</string>
+    <string name="new_holiday_title_text">New Holiday</string>
+    <string name="new_holiday_holiday_name_box_hint">Holiday Name</string>
+    <string name="new_holiday_date_box_hint">Date</string>
+    <string name="new_holiday_create_holiday_button_text">Save holiday</string>
+    <string name="add_holiday_button_text">Add Holiday</string>
 </resources>
