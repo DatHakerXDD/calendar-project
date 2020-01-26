@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -13,29 +12,25 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="@string/school_name_box_hint"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
-        android:importantForAutofill="no"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.049"/>
+        app:layout_constraintVertical_bias="0.049" />
 
-    <EditText
-        android:id="@+id/schoolYearEt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/year_box_hint"
-        android:inputType="number"
-        android:importantForAutofill="no"
+    <Spinner
+        android:id="@+id/schoolYearSpn"
+        android:layout_width="215dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.191"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.126" />
+        app:layout_constraintVertical_bias="0.13" />
 
     <Switch
         android:id="@+id/nineDaySw"
@@ -49,16 +44,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.088" />
 
-
-    <Button
+    <ToggleButton
         android:id="@+id/mondayBtn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/monday_button_text"
+        android:textOff="@string/monday_button_text"
+        android:textOn="@string/monday_button_text"
         android:visibility="visible"
-        android:clickable="true"
-        android:focusable="true"
-        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -67,15 +60,14 @@
         app:layout_constraintVertical_bias="0.213" />
 
 
-    <Button
+    <ToggleButton
         android:id="@+id/tuesdayBtn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/tuesday_button_text"
+        android:textOff="@string/tuesday_button_text"
+        android:textOn="@string/tuesday_button_text"
         android:visibility="visible"
-        android:clickable="true"
-        android:focusable="true"
-        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.27"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -83,15 +75,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/wednesdayBtn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/wednesday_button_text"
+        android:textOff="@string/wednesday_button_text"
+        android:textOn="@string/wednesday_button_text"
         android:visibility="visible"
-        android:clickable="true"
-        android:focusable="true"
-        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -99,15 +90,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/thursdayBtn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/thursday_button_text"
+        android:textOff="@string/thursday_button_text"
+        android:textOn="@string/thursday_button_text"
         android:visibility="visible"
-        android:clickable="true"
-        android:focusable="true"
-        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.717"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -115,15 +105,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/fridayBtn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/friday_button_text"
+        android:textOff="@string/friday_button_text"
+        android:textOn="@string/friday_button_text"
         android:visibility="visible"
-        android:clickable="true"
-        android:focusable="true"
-        android:enabled="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -131,15 +120,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day1Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day1_button_text"
+        android:textOff="@string/day1_button_text"
+        android:textOn="@string/day1_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -148,15 +136,14 @@
         app:layout_constraintVertical_bias="0.213" />
 
 
-    <Button
+    <ToggleButton
         android:id="@+id/day2Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day2_button_text"
+        android:textOff="@string/day2_button_text"
+        android:textOn="@string/day2_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.27"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -164,15 +151,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day3Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day3_button_text"
+        android:textOff="@string/day3_button_text"
+        android:textOn="@string/day3_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -180,15 +166,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day4Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day4_button_text"
+        android:textOff="@string/day4_button_text"
+        android:textOn="@string/day4_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.717"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -196,15 +181,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day5Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day5_button_text"
+        android:textOff="@string/day5_button_text"
+        android:textOn="@string/day5_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.94"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -212,15 +196,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.213" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day6Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day6_button_text"
+        android:textOff="@string/day6_button_text"
+        android:textOn="@string/day6_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -228,15 +211,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.268" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day7Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day7_button_text"
+        android:textOff="@string/day7_button_text"
+        android:textOn="@string/day7_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.38"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -244,15 +226,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.268" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day8Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day8_button_text"
+        android:textOff="@string/day8_button_text"
+        android:textOn="@string/day8_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.607"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -260,15 +241,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.268" />
 
-    <Button
+    <ToggleButton
         android:id="@+id/day9Btn"
         android:layout_width="@dimen/day_button_width"
         android:layout_height="@dimen/day_button_height"
         android:text="@string/day9_button_text"
+        android:textOff="@string/day9_button_text"
+        android:textOn="@string/day9_button_text"
         android:visibility="gone"
-        android:clickable="false"
-        android:focusable="false"
-        android:enabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.83"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -282,37 +262,11 @@
         android:layout_height="@dimen/create_new_period_button_height"
         android:text="@string/create_new_period_button_text"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
-
-    <Spinner
-        android:id="@+id/period1spn"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/period_spinner_side_margin"
-        android:layout_marginRight="@dimen/period_spinner_side_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.465" />
-
-    <Spinner
-        android:id="@+id/period2spn"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginLeft="@dimen/period_spinner_side_margin"
-        android:layout_marginRight="@dimen/period_spinner_side_margin"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.716" />
+        app:layout_constraintVertical_bias="0.348" />
 
     <Spinner
         android:id="@+id/period3spn"
@@ -325,10 +279,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.801" />
+        app:layout_constraintVertical_bias="0.613" />
 
     <Spinner
-        android:id="@+id/period4spn"
+        android:id="@+id/period1spn"
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_marginLeft="@dimen/period_spinner_side_margin"
@@ -338,7 +292,20 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.632" />
+        app:layout_constraintVertical_bias="0.439" />
+
+    <Spinner
+        android:id="@+id/period2spn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/period_spinner_side_margin"
+        android:layout_marginRight="@dimen/period_spinner_side_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.526" />
 
     <Spinner
         android:id="@+id/period5spn"
@@ -351,7 +318,60 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.545" />
+        app:layout_constraintVertical_bias="0.782" />
+
+    <Spinner
+        android:id="@+id/period4spn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/period_spinner_side_margin"
+        android:layout_marginRight="@dimen/period_spinner_side_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.697" />
+
+
+    <Button
+        android:id="@+id/next1Btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:text="@string/next_1_button_text"
+        android:enabled="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.959" />
+
+    <CheckBox
+        android:id="@+id/confirmChk"
+        android:layout_width="@dimen/confirm_box_height"
+        android:layout_height="wrap_content"
+        android:text="@string/new_period_confirm_checkbox_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.869" />
+
+    <Button
+        android:id="@+id/addHolidayBtn"
+        android:layout_width="@dimen/add_holiday_button_width"
+        android:layout_height="@dimen/add_period_button_height"
+        android:text="@string/add_holiday_button_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.872"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343"
+        android:visibility="gone"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
