@@ -27,10 +27,25 @@
     <string name="new_period_group_box_hint">Group (optional)</string>
     <string name="new_period_create_period_button_text">Create Period</string>
     <string name="new_period_confirm_checkbox_text">Confirm</string>
-    <string name="next_1_button_text">Next…</string>
+    <string name="next_button_text">Next…</string>
     <string name="new_holiday_title_text">New Holiday</string>
     <string name="new_holiday_holiday_name_box_hint">Holiday Name</string>
     <string name="new_holiday_date_box_hint">Date</string>
     <string name="new_holiday_create_holiday_button_text">Save holiday</string>
     <string name="add_holiday_button_text">Add Holiday</string>
+    <string name="back_button_text">Back</string>
+    <string name="holiday_title_1_text">Create custom set of holidays</string>
+    <string name="holiday_title_2_text">OR</string>
+    <string name="holiday_title_3_text">Choose existing list of holidays</string>
+    <string name="empty_string" />
+    <string name="period_1_time_text">Period 1</string>
+    <string name="period_2_time_text">Period 2</string>
+    <string name="period_3_time_text">Period 3</string>
+    <string name="period_4time_text">Period 4</string>
+    <string name="period_5time_text">Period 5</string>
+    <string name="period_start_text">Start Time</string>
+    <string name="period_end_text">End Time</string>
+    <string name="school_start_text">First day of school</string>
+    <string name="school_end_text">Last day of school</string>
+    <string name="period_time_edittext_hint">hh:mm:ss</string>
 </resources>
