@@ -510,8 +510,8 @@
 
     <EditText
         android:id="@+id/period1StartEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -526,8 +526,8 @@
 
     <EditText
         android:id="@+id/period2StartEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -542,8 +542,8 @@
 
     <EditText
         android:id="@+id/period3StartEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -558,8 +558,8 @@
 
     <EditText
         android:id="@+id/period4StartEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -575,8 +575,8 @@
 
     <EditText
         android:id="@+id/period5StartEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -591,8 +591,8 @@
 
     <EditText
         android:id="@+id/period1EndEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -607,8 +607,8 @@
 
     <EditText
         android:id="@+id/period2EndEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -623,8 +623,8 @@
 
     <EditText
         android:id="@+id/period3EndEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -640,8 +640,8 @@
 
     <EditText
         android:id="@+id/period4EndEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -657,8 +657,8 @@
 
     <EditText
         android:id="@+id/period5EndEt"
-        android:layout_width="93dp"
-        android:layout_height="45dp"
+        android:layout_width="@dimen/period_time_edittext_width"
+        android:layout_height="@dimen/period_time_edittext_height"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
