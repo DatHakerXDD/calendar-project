@@ -508,171 +508,151 @@
         app:layout_constraintVertical_bias="0.91"
         android:visibility="gone"/>
 
-    <EditText
-        android:id="@+id/period1StartEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period1StartBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.454"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/period2StartEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period2StartBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.525"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/period3StartEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period3StartBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.594"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone"/>
 
-    <EditText
-        android:id="@+id/period4StartEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period4StartBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.661"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
 
-    <EditText
-        android:id="@+id/period5StartEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period5StartBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.462"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.729"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/period1EndEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period1EndBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.454"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/period2EndEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period2EndBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.525"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/period3EndEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period3EndBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.594"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone"  />
 
 
-    <EditText
-        android:id="@+id/period4EndEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period4EndBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.66"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone"/>
 
 
-    <EditText
-        android:id="@+id/period5EndEt"
-        android:layout_width="@dimen/period_time_edittext_width"
-        android:layout_height="@dimen/period_time_edittext_height"
+    <Button
+        android:id="@+id/period5EndBtn"
+        android:layout_width="@dimen/period_time_button_width"
+        android:layout_height="@dimen/period_time_button_height"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:text="@string/period_button_initial_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.729"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/period1Time"
+        android:id="@+id/period1TimeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period_1_time_text"
@@ -685,7 +665,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/period2Time"
+        android:id="@+id/period2TimeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period_2_time_text"
@@ -698,7 +678,7 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/period3Time"
+        android:id="@+id/period3TimeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period_3_time_text"
@@ -712,7 +692,7 @@
 
 
     <TextView
-        android:id="@+id/period4Time"
+        android:id="@+id/period4TimeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period_4time_text"
@@ -725,7 +705,7 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/period5Time"
+        android:id="@+id/period5TimeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period_5time_text"
@@ -738,7 +718,7 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/periodStart"
+        android:id="@+id/periodStartTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period_start_text"
@@ -751,7 +731,7 @@
         android:visibility="gone" />
 
     <TextView
-        android:id="@+id/periodEnd"
+        android:id="@+id/periodEndTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/period_end_text"
@@ -789,36 +769,30 @@
         app:layout_constraintVertical_bias="0.258"
         android:visibility="gone" />
 
-    <EditText
-        android:id="@+id/schoolYearStartEt"
+    <Button
+        android:id="@+id/schoolYearStartBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.16"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone"/>
 
-    <EditText
-        android:id="@+id/schoolYearEndEt"
+    <Button
+        android:id="@+id/schoolYearEndBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="date"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.843"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.253"
-        android:importantForAutofill="no"
-        android:hint="@string/period_time_edittext_hint"
         android:visibility="gone" />
 
 
