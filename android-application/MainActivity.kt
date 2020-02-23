@@ -3,6 +3,7 @@ package com.example.therealapplication
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
@@ -86,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     var textview_date: TextView? = null
     var cal = Calendar.getInstance()
 
-    @SuppressLint("InflateParams", "NewApi")
+    @SuppressLint("InflateParams", "NewApi", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -586,7 +587,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
         timePickBtns.indices.forEach { i ->
             timePickBtns[i].setOnClickListener{
                 val timeAlert = AlertDialog.Builder(this)
@@ -610,13 +610,15 @@ class MainActivity : AppCompatActivity() {
                 updateDateInView()
             }
 
+        }
     }
 
     private fun updateDateInView() {
-        val myFormat = "MM/dd/yyyy" // mention the format you need
+        val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         textview_date!!.text = sdf.format(cal.getTime())
     }
+
 }
 
 fun createCSV() {
