@@ -20,7 +20,6 @@ import java.time.LocalTime
 import java.util.*
 import android.widget.TextView
 import android.widget.Button
-import android.widget.DatePicker
 import java.text.SimpleDateFormat
 
 
@@ -67,7 +66,7 @@ var weekDaySchedule: Array<SchoolDay> = Array(5) { SchoolDay() }
 var nineDaySchedule: Array<SchoolDay> = Array(9) { SchoolDay() }
 var periodTypes: MutableList<SchoolPeriod> = mutableListOf(defaultPeriod)
 var periodNames: MutableList<String> = mutableListOf(defaultPeriod.className)
-var holidays: MutableList<Holiday> = mutableListOf()
+var holidays: MutableList<Holiday> = mutableListOf() //TODO
 @SuppressLint("NewApi")
 var defaultHolidayChoices: MutableList<MutableList<Holiday>> = mutableListOf(mutableListOf(Holiday("List of holidays",LocalDate.of(2000, 1, 1))))
 var defaultHolidayListNames : MutableList<String> = mutableListOf("--- School holiday lists ---")
@@ -81,53 +80,54 @@ var isItNineDays : Boolean = false
 var schoolDays : Array<LocalDate> = Array(2) {LocalDate.of(2000,1,1) }
 @RequiresApi(Build.VERSION_CODES.O)
 var schoolTimeInfo : Array<LocalTime> = Array(10) {LocalTime.of(12,0,0)}
-class MainActivity : AppCompatActivity() {
+var selectedHolidayList : Int = 0
 
-    var button_date: Button? = null
-    var textview_date: TextView? = null
-    var cal = Calendar.getInstance()
+@RequiresApi(Build.VERSION_CODES.O)
+val stLouisHolidays = mutableListOf(
+    Holiday("Demie journée pédagogique", LocalDate.of(2019, 8, 28)),
+    Holiday("Demie journée pédagogique", LocalDate.of(2019, 8, 29)),
+    Holiday("Fête du travail", LocalDate.of(2019, 9, 2)),
+    Holiday("Journée pédagogique", LocalDate.of(2019, 9, 20)),
+    Holiday("Action de grâce", LocalDate.of(2019, 10, 14)),
+    Holiday("Journée pédagogique", LocalDate.of(2019, 10, 21)),
+    Holiday("Journée pédagogique", LocalDate.of(2019, 11, 1)),
+    Holiday("Journée pédagogique mobile", LocalDate.of(2019, 11, 22)),
+    Holiday("Journée pédagogique", LocalDate.of(2019, 12, 6)),
+    Holiday("Congé de Noël", LocalDate.of(2019, 12, 23)),
+    Holiday("Congé de Noël", LocalDate.of(2019, 12, 24)),
+    Holiday("Noël", LocalDate.of(2019, 12, 25)),
+    Holiday("Congé de Noël", LocalDate.of(2019, 12, 26)),
+    Holiday("Congé de Noël", LocalDate.of(2019, 12, 27)),
+    Holiday("Congé de Noël", LocalDate.of(2019, 12, 30)),
+    Holiday("Congé de Noël", LocalDate.of(2019, 12, 31)),
+    Holiday("Congé de Noël", LocalDate.of(2020, 1, 1)),
+    Holiday("Journée pédagogique", LocalDate.of(2020, 1, 24)),
+    Holiday("Journée pédagogique", LocalDate.of(2020, 2, 12)),
+    Holiday("Journée blanche", LocalDate.of(2020, 2, 20)),
+    Holiday("Journée pédagogique mobile", LocalDate.of(2020, 2, 28)),
+    Holiday("Semaine de relâche", LocalDate.of(2020, 3, 2)),
+    Holiday("Semaine de relâche", LocalDate.of(2020, 3, 3)),
+    Holiday("Semaine de relâche", LocalDate.of(2020, 3, 4)),
+    Holiday("Semaine de relâche", LocalDate.of(2020, 3, 5)),
+    Holiday("Semaine de relâche", LocalDate.of(2020, 3, 6)),
+    Holiday("Journée pédagogique mobile", LocalDate.of(2020, 4, 9)),
+    Holiday("Vendredi saint", LocalDate.of(2020, 4, 10)),
+    Holiday("Lundi de Pâques", LocalDate.of(2020, 4, 13)),
+    Holiday("Journée pédagogique", LocalDate.of(2020, 4, 24)),
+    Holiday("Journée pédagogique", LocalDate.of(2020, 5, 1)),
+    Holiday("Journée verte", LocalDate.of(2020, 5, 27)),
+    Holiday("Journée nationale des patriotes", LocalDate.of(2020, 5, 18)),
+    Holiday("Journée pédagogique", LocalDate.of(2020, 6, 1)),
+    Holiday("Défi endurance", LocalDate.of(2020, 6, 5)))
+
+class MainActivity : AppCompatActivity() {
 
     @SuppressLint("InflateParams", "NewApi", "SimpleDateFormat")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val stLouisHolidays = mutableListOf(
-            Holiday("Demie journée pédagogique", LocalDate.of(2019, 8, 28)),
-            Holiday("Demie journée pédagogique", LocalDate.of(2019, 8, 29)),
-            Holiday("Fête du travail", LocalDate.of(2019, 9, 2)),
-            Holiday("Journée pédagogique", LocalDate.of(2019, 9, 20)),
-            Holiday("Action de grâce", LocalDate.of(2019, 10, 14)),
-            Holiday("Journée pédagogique", LocalDate.of(2019, 10, 21)),
-            Holiday("Journée pédagogique", LocalDate.of(2019, 11, 1)),
-            Holiday("Journée pédagogique mobile", LocalDate.of(2019, 11, 22)),
-            Holiday("Journée pédagogique", LocalDate.of(2019, 12, 6)),
-            Holiday("Congé de Noël", LocalDate.of(2019, 12, 23)),
-            Holiday("Congé de Noël", LocalDate.of(2019, 12, 24)),
-            Holiday("Noël", LocalDate.of(2019, 12, 25)),
-            Holiday("Congé de Noël", LocalDate.of(2019, 12, 26)),
-            Holiday("Congé de Noël", LocalDate.of(2019, 12, 27)),
-            Holiday("Congé de Noël", LocalDate.of(2019, 12, 30)),
-            Holiday("Congé de Noël", LocalDate.of(2019, 12, 31)),
-            Holiday("Congé de Noël", LocalDate.of(2020, 1, 1)),
-            Holiday("Journée pédagogique", LocalDate.of(2020, 1, 24)),
-            Holiday("Journée pédagogique", LocalDate.of(2020, 2, 12)),
-            Holiday("Journée blanche", LocalDate.of(2020, 2, 20)),
-            Holiday("Journée pédagogique mobile", LocalDate.of(2020, 2, 28)),
-            Holiday("Semaine de relâche", LocalDate.of(2020, 3, 2)),
-            Holiday("Semaine de relâche", LocalDate.of(2020, 3, 3)),
-            Holiday("Semaine de relâche", LocalDate.of(2020, 3, 4)),
-            Holiday("Semaine de relâche", LocalDate.of(2020, 3, 5)),
-            Holiday("Semaine de relâche", LocalDate.of(2020, 3, 6)),
-            Holiday("Journée pédagogique mobile", LocalDate.of(2020, 4, 9)),
-            Holiday("Vendredi saint", LocalDate.of(2020, 4, 10)),
-            Holiday("Lundi de Pâques", LocalDate.of(2020, 4, 13)),
-            Holiday("Journée pédagogique", LocalDate.of(2020, 4, 24)),
-            Holiday("Journée pédagogique", LocalDate.of(2020, 5, 1)),
-            Holiday("Journée verte", LocalDate.of(2020, 5, 27)),
-            Holiday("Journée nationale des patriotes", LocalDate.of(2020, 5, 18)),
-            Holiday("Journée pédagogique", LocalDate.of(2020, 6, 1)),
-            Holiday("Défi endurance", LocalDate.of(2020, 6, 5)))
+
 
         defaultHolidayChoices.add(stLouisHolidays)
         defaultHolidayListNames.add("Collège St-Louis")
@@ -190,8 +190,8 @@ class MainActivity : AppCompatActivity() {
             period5TimeTv,
             periodStartTv,
             periodEndTv,
-            schoolYearStartEt,
-            schoolYearEndEt,
+            schoolYearStartBtn,
+            schoolYearEndBtn,
             schoolYearStartTv,
             schoolYearEndTv
         )
@@ -210,7 +210,7 @@ class MainActivity : AppCompatActivity() {
             schoolYears
         )
         schoolYearSpn.setSelection(0)
-        //Show and hide day buttons according to nine day switch
+
         val dayButtons: List<ToggleButton> = listOf(
             mondayBtn,
             tuesdayBtn,
@@ -261,14 +261,12 @@ class MainActivity : AppCompatActivity() {
         for (i in (dayButtons.indices)) {
             if (i < 5) {
                 dayButtons[i].setOnClickListener {
-                    //Get periods of that day and display on spinners
                     for (o in dayButtons.indices){
                         dayButtons[o].isChecked = false
                     }
                     dayButtons[i].isChecked = true
                     day = i
                     for (k in (periodSpinners.indices)) {
-                        //Set spinner adapters with periodNames list
                         periodSpinners[k].adapter = ArrayAdapter(
                             this,
                             android.R.layout.simple_spinner_dropdown_item,
@@ -422,6 +420,7 @@ class MainActivity : AppCompatActivity() {
                         page2Objects[it].visibility = VISIBLE
                     }
                     holidayTgb2.performClick()
+                    holidayChoiceSpn.setSelection(selectedHolidayList)
                 }
             }
         }
@@ -449,6 +448,7 @@ class MainActivity : AppCompatActivity() {
                 page2Objects[it].visibility = GONE
             }
             mondayBtn.performClick()
+            selectedHolidayList = holidayChoiceSpn.selectedItemPosition
         }
 
         addHolidayBtn.setOnClickListener{
@@ -466,9 +466,9 @@ class MainActivity : AppCompatActivity() {
 
         mondayBtn.performClick()
 
-        val datePickEts = listOf<EditText>(
-            schoolYearStartEt,
-            schoolYearEndEt
+        val datePickBtns = listOf<Button>(
+            schoolYearStartBtn,
+            schoolYearEndBtn
         )
         val timePickBtns = listOf<Button>(
             period1StartBtn,
@@ -483,6 +483,7 @@ class MainActivity : AppCompatActivity() {
             period5EndBtn
         )
 
+        var firstTime = true
         next2btn.setOnClickListener{
             when {
                 holidayTgb1.isChecked -> {
@@ -493,21 +494,30 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(baseContext, "Please choose a valid list of holidays", Toast.LENGTH_SHORT).show()
                 }
                 else -> {
-                    for (i in page2Objects.indices){
-                        page2Objects[i].visibility = GONE
+                    selectedHolidayList = holidayChoiceSpn.selectedItemPosition
+                    page2Objects.indices.forEach {
+                        page2Objects[it].visibility = GONE
                     }
-                    for (i in page3Objects.indices){
-                        page3Objects[i].visibility = VISIBLE
-                        datePickEts.indices.forEach {
-                            datePickEts[it].setText(schoolDays[it].toString())
-                            timePickBtns[it].text = schoolTimeInfo[it + 2].toString()
+                    page3Objects.indices.forEach {
+                        page3Objects[it].visibility = VISIBLE
+                    }
+                    if (firstTime) {
+                        firstTime = false
+
+                    }
+                    else{
+                        datePickBtns.indices.forEach {
+                            datePickBtns[it].text = schoolDays[it].toString()
+                        }
+                        timePickBtns.indices.forEach {
+                            timePickBtns[it].text = schoolTimeInfo.toString()
                         }
                     }
                 }
             }
         }
 
-        val periodTimeEditTexts : List<TextView> = listOf(
+        val periodTimeBtns : List<TextView> = listOf(
             period1StartBtn,
             period1EndBtn,
             period2StartBtn,
@@ -518,14 +528,14 @@ class MainActivity : AppCompatActivity() {
             period4EndBtn,
             period5StartBtn,
             period5EndBtn,
-            schoolYearStartEt,
-            schoolYearEndEt
+            schoolYearStartBtn,
+            schoolYearEndBtn
         )
 
         var pass = true
         next3Btn.setOnClickListener{
-            periodTimeEditTexts.indices.forEach {
-                if (periodTimeEditTexts[it].text.toString() == ""){
+            periodTimeBtns.indices.forEach {
+                if (periodTimeBtns[it].text.toString() == ""){
                     pass = false
                 }
             }
@@ -535,10 +545,6 @@ class MainActivity : AppCompatActivity() {
                 generateCalendarBuilder.setCancelable(false)
                 generateCalendarBuilder.setMessage("Are you sure you want to continue?")
                 generateCalendarBuilder.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
-                    repeat((0..9).count()) {
-                        // periodTimeInfo[i] = timeFormatter.parse(periodTimeEditTexts[i].text.toString())
-                        // TODO
-                    }
                     createCSV()
                 }
                 generateCalendarBuilder.setNegativeButton("Cancel"){ _: DialogInterface, _: Int ->
@@ -559,77 +565,61 @@ class MainActivity : AppCompatActivity() {
             page3Objects.indices.forEach {
                 page3Objects[it].visibility = GONE
             }
-            (0..9).forEach {
-                //TODO periodTimeInfo[i] = periodTimeEditTexts[i].text.toString().
-            }
+            holidayChoiceSpn.setSelection(selectedHolidayList)
         }
 
         val todayDate = Calendar.getInstance()
 
+        datePickBtns.indices.forEach {
+            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                todayDate.set(Calendar.YEAR, year)
+                todayDate.set(Calendar.MONTH, monthOfYear)
+                todayDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-        datePickEts.indices.forEach { i ->
-            datePickEts[i].setOnClickListener{
-                val dateAlert = AlertDialog.Builder(this)
-                val dateAlertView = layoutInflater.inflate(R.layout.date_picker, null)
-                val datePicker = dateAlertView.findViewById<DatePicker>(R.id.datePicker)
-                dateAlert.setView(dateAlertView)
-                dateAlert.setCancelable(true)
-                dateAlert.show()
-                datePicker.init(todayDate.get(Calendar.YEAR), todayDate.get(Calendar.MONTH), todayDate.get(Calendar.DAY_OF_MONTH)
-                ) { _, year, month, day ->
-                    if (year != thisYear && year != (thisYear + 1)){
-                        Toast.makeText(baseContext, "Wrong Year", Toast.LENGTH_SHORT).show()
-                    } else{
-                        Toast.makeText(baseContext, "Date saved!", Toast.LENGTH_SHORT).show()
-                        schoolDays[i] = LocalDate.of(year, month, day)
-                    }
-                }
+                val myFormat = "EEE, MMM d, yyyy"
+                val sdf = SimpleDateFormat(myFormat, Locale.US)
+                datePickBtns[it].text = sdf.format(todayDate.time)
+                schoolDays[it] = LocalDate.of(year, monthOfYear, dayOfMonth)
+            }
+            datePickBtns[it].setOnClickListener {
+                DatePickerDialog(
+                    this@MainActivity, dateSetListener,
+                    todayDate.get(Calendar.YEAR),
+                    todayDate.get(Calendar.MONTH),
+                    todayDate.get(Calendar.DAY_OF_MONTH)
+                ).show()
             }
         }
 
-        timePickBtns.indices.forEach { i ->
-            timePickBtns[i].setOnClickListener{
-                val timeAlert = AlertDialog.Builder(this)
-                val timeAlertView = layoutInflater.inflate(R.layout.time_picker, null)
-                val timePicker = timeAlertView.findViewById<TimePicker>(R.id.timePicker)
-                timeAlert.setView(timeAlertView)
-                timeAlert.setCancelable(true)
-                timeAlert.show()
-                timePicker.setOnTimeChangedListener{_, hour, min ->
-                    schoolTimeInfo[i + 2] = LocalTime.of(hour, min, 0)
-                    Toast.makeText(baseContext, "Time Saved!", Toast.LENGTH_SHORT).show()
+        timePickBtns.indices.forEach{ i ->
+            timePickBtns[i].setOnClickListener {
+                val cal = Calendar.getInstance()
+                val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
+                    cal.set(Calendar.HOUR_OF_DAY, hour)
+                    cal.set(Calendar.MINUTE, minute)
+                    timePickBtns[i].text = SimpleDateFormat("HH:mm").format(cal.time)
+                    schoolTimeInfo[i] = LocalTime.of(hour,minute,0)
                 }
+                TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
             }
-        }
-
-        val dateSetListener =
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                cal.set(Calendar.YEAR, year)
-                cal.set(Calendar.MONTH, monthOfYear)
-                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateInView()
-            }
-
         }
     }
-
-    private fun updateDateInView() {
-        val myFormat = "dd/MM/yyyy"
-        val sdf = SimpleDateFormat(myFormat, Locale.US)
-        textview_date!!.text = sdf.format(cal.getTime())
-    }
-
 }
 
 fun createCSV() {
 
-    val CSVFile = File("CSV Export")
+    val csvExport = File("CSV Export")
     for (month in (0..11)) {
+        //TODO
     }
-    if (CSVFile.createNewFile()) {
-        with(CSVFile) {
+    if (csvExport.createNewFile()) {
+        with(csvExport) {
             writeText("Subject,Start Date,End Date,All Day Event,Start Time,End Time,Description,Location,Private")
             writeText("")
         }
     }
 }//TODO
+
+fun createSchedule(){
+
+}
