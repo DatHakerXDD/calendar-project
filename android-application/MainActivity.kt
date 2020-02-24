@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.os.Build
 import android.os.Bundle
@@ -27,8 +28,7 @@ data class SchoolPeriod(
     var className: String,
     var teacher: String = "",
     var classNumber: String = "",
-    var groupNumber: String = "",
-    var timeOfDay: String = ""
+    var groupNumber: String = ""
 )
 
 val defaultPeriod : SchoolPeriod = SchoolPeriod(
@@ -66,7 +66,7 @@ var weekDaySchedule: Array<SchoolDay> = Array(5) { SchoolDay() }
 var nineDaySchedule: Array<SchoolDay> = Array(9) { SchoolDay() }
 var periodTypes: MutableList<SchoolPeriod> = mutableListOf(defaultPeriod)
 var periodNames: MutableList<String> = mutableListOf(defaultPeriod.className)
-var holidays: MutableList<Holiday> = mutableListOf() //TODO
+var holidayDates: MutableList<LocalDate> = mutableListOf() //TODO
 @SuppressLint("NewApi")
 var defaultHolidayChoices: MutableList<MutableList<Holiday>> = mutableListOf(mutableListOf(Holiday("List of holidays",LocalDate.of(2000, 1, 1))))
 var defaultHolidayListNames : MutableList<String> = mutableListOf("--- School holiday lists ---")
@@ -127,8 +127,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
+        val file = File(applicationContext.filesDir, "test.txt")
         defaultHolidayChoices.add(stLouisHolidays)
         defaultHolidayListNames.add("Collège St-Louis")
 
@@ -338,6 +337,10 @@ class MainActivity : AppCompatActivity() {
                         )
                     )
                     periodNames.add(periodName.text.toString())
+                    periodDialogView.findViewById<EditText>(R.id.periodNameEt).text.clear()
+                    periodDialogView.findViewById<EditText>(R.id.teacherEt).text.clear()
+                    periodDialogView.findViewById<EditText>(R.id.classroomRoomEt).text.clear()
+                    periodDialogView.findViewById<EditText>(R.id.groupEt).text.clear()
                     Toast.makeText(baseContext, "Period Created!", Toast.LENGTH_SHORT).show()
                 }
                 val periodBuilder2 = AlertDialog.Builder(this)
@@ -351,6 +354,10 @@ class MainActivity : AppCompatActivity() {
                         teacher = teacher.text.toString(),
                         classNumber = classRoom.text.toString(),
                         groupNumber = groupNumber.text.toString())
+                    periodDialogView.findViewById<EditText>(R.id.periodNameEt).text.clear()
+                    periodDialogView.findViewById<EditText>(R.id.teacherEt).text.clear()
+                    periodDialogView.findViewById<EditText>(R.id.classroomRoomEt).text.clear()
+                    periodDialogView.findViewById<EditText>(R.id.groupEt).text.clear()
                     Toast.makeText(baseContext, "Period Created!", Toast.LENGTH_SHORT).show()
                 }
                 periodBuilder2.setNegativeButton("Never mind...") { _: DialogInterface, _: Int -> }
@@ -375,6 +382,10 @@ class MainActivity : AppCompatActivity() {
                             )
                         )
                         periodNames.add(periodName.text.toString())
+                        periodDialogView.findViewById<EditText>(R.id.periodNameEt).text.clear()
+                        periodDialogView.findViewById<EditText>(R.id.teacherEt).text.clear()
+                        periodDialogView.findViewById<EditText>(R.id.classroomRoomEt).text.clear()
+                        periodDialogView.findViewById<EditText>(R.id.groupEt).text.clear()
                         Toast.makeText(baseContext, "Period Created!", Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -426,29 +437,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         back1btn.setOnClickListener{
-            nineDaySw.isChecked = isItNineDays
-            day1Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day2Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day3Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day4Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day5Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day6Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day7Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day8Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            day9Btn.visibility = if (!isItNineDays) { GONE } else VISIBLE
-            mondayBtn.visibility = if (isItNineDays) { GONE } else VISIBLE
-            tuesdayBtn.visibility = if (isItNineDays) { GONE } else VISIBLE
-            wednesdayBtn.visibility = if (isItNineDays) { GONE } else VISIBLE
-            thursdayBtn.visibility = if (isItNineDays) { GONE } else VISIBLE
-            fridayBtn.visibility = if (isItNineDays) { GONE } else VISIBLE
+            selectedHolidayList = holidayChoiceSpn.selectedItemPosition
             page1Objects.indices.forEach {
                 page1Objects[it].visibility = VISIBLE
             }
             page2Objects.indices.forEach {
                 page2Objects[it].visibility = GONE
             }
-            mondayBtn.performClick()
-            selectedHolidayList = holidayChoiceSpn.selectedItemPosition
+            nineDaySw.isChecked = isItNineDays
+            day1Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day2Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            day3Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            day4Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            day5Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            day6Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            day7Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            day8Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            day9Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
+            mondayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
+            tuesdayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
+            wednesdayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
+            thursdayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
+            fridayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
+            if (isItNineDays) day1Btn.performClick() else mondayBtn.performClick()
         }
 
         addHolidayBtn.setOnClickListener{
@@ -510,7 +521,7 @@ class MainActivity : AppCompatActivity() {
                             datePickBtns[it].text = schoolDays[it].toString()
                         }
                         timePickBtns.indices.forEach {
-                            timePickBtns[it].text = schoolTimeInfo.toString()
+                            timePickBtns[it].text = schoolTimeInfo[it].toString()
                         }
                     }
                 }
@@ -535,7 +546,7 @@ class MainActivity : AppCompatActivity() {
         var pass = true
         next3Btn.setOnClickListener{
             periodTimeBtns.indices.forEach {
-                if (periodTimeBtns[it].text.toString() == ""){
+                if (periodTimeBtns[it].text.toString() == "" || periodTimeBtns[it].text.toString() == "NOT SET"){
                     pass = false
                 }
             }
@@ -604,22 +615,60 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-}
 
-fun createCSV() {
 
-    val csvExport = File("CSV Export")
-    for (month in (0..11)) {
-        //TODO
-    }
-    if (csvExport.createNewFile()) {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun createCSV() {
+        val csvExport = File(applicationContext.filesDir, "CSV_export.txt")
+        
         with(csvExport) {
-            writeText("Subject,Start Date,End Date,All Day Event,Start Time,End Time,Description,Location,Private")
-            writeText("")
+            this.writeText("Subject,Start Date,End Date,All Day Event,Start Time,End Time,Description,Location,Private\n")
+            defaultHolidayChoices[selectedHolidayList].forEach{
+                holidayDates.add(it.holidayDate)
+                this.writeText(it.holidayName + "," + it.holidayDate.toString() + "," + it.holidayDate.toString() + ",True,,No school," + schoolName + ",False\n")
+            }
+
+            var dayCount = schoolDays[0]
+            var dayCountInt = 0
+            val firstDay = schoolDays[0]
+            val lastDay = schoolDays[1]
+
+            if (isItNineDays){
+                while (true) {
+                    nineDaySchedule.indices.forEach {
+                        for (periodNumber in (1..5)) {
+
+                            if (dayCount.dayOfWeek == LocalDate.of(
+                                    2020,
+                                    2,
+                                    22
+                                ).dayOfWeek || dayCount.dayOfWeek == LocalDate.of(
+                                    2020,
+                                    2,
+                                    23
+                                ).dayOfWeek
+                            ) {
+                                dayCount = dayCount.plusDays(1)
+                            }
+                            else{
+                                with(nineDaySchedule[it].periods[periodNumber]) {
+                                    csvExport.writeText("$className,$dayCount,$dayCount,False,${schoolTimeInfo[(it - 1) * 2]},${schoolTimeInfo[(it - 1) * 2 + 1]},$groupNumber with $teacher,$classNumber,False\n")
+                                }
+                                dayCountInt++
+                                dayCount.plusDays(1)
+                            }
+
+                            if (dayCount == lastDay || firstDay.plusDays(dayCountInt.toLong()) == lastDay || dayCountInt > 250){
+                                break
+                            }
+                        }
+                    }
+                }
+            }
         }
+        // TODO Toast.makeText(baseContext, "CSV file created!", Toast.LENGTH_SHORT).show()
     }
-}//TODO
-
-fun createSchedule(){
-
 }
+
+
+
