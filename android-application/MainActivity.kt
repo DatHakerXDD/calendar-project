@@ -1,4 +1,4 @@
-package com.example.therealapplication
+package com.example.realcalendarapp
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
@@ -33,7 +33,7 @@ data class SchoolPeriod(
     var groupNumber: String = ""
 )
 
-val defaultPeriod : SchoolPeriod = SchoolPeriod(
+val defaultPeriod: SchoolPeriod = SchoolPeriod(
     className = "Period Name",
     teacher = "Teacher's Name",
     classNumber = "Classroom Room",
@@ -41,7 +41,7 @@ val defaultPeriod : SchoolPeriod = SchoolPeriod(
 )
 
 data class SchoolDay(
-    var periods : Array<SchoolPeriod> = Array(5) { defaultPeriod }
+    var periods: Array<SchoolPeriod> = Array(5) { defaultPeriod }
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
@@ -60,8 +60,8 @@ data class SchoolDay(
 }
 
 data class Holiday(
-    var holidayName : String,
-    var holidayDate : LocalDate
+    var holidayName: String,
+    var holidayDate: LocalDate
 )
 
 var weekDaySchedule: Array<SchoolDay> = Array(5) { SchoolDay() }
@@ -70,29 +70,31 @@ var periodTypes: MutableList<SchoolPeriod> = mutableListOf(defaultPeriod)
 var periodNames: MutableList<String> = mutableListOf(defaultPeriod.className)
 var holidayDates: MutableList<LocalDate> = mutableListOf() //TODO
 @SuppressLint("NewApi")
-var defaultHolidayChoices: MutableList<MutableList<Holiday>> = mutableListOf(mutableListOf(Holiday("List of holidays",LocalDate.of(2000, 1, 1))))
-var defaultHolidayListNames : MutableList<String> = mutableListOf("--- School holiday lists ---")
-var day : Int = 0
-var schoolYears : MutableList<String> = mutableListOf("School Year")
-var schoolName : String = ""
-var schoolYear : Int = 0
-var isItNineDays : Boolean = false
+var defaultHolidayChoices: MutableList<MutableList<Holiday>> =
+    mutableListOf(mutableListOf(Holiday("List of holidays", LocalDate.of(2000, 1, 1))))
+var defaultHolidayListNames: MutableList<String> = mutableListOf("--- School holiday lists ---")
+var day: Int = 0
+var schoolYears: MutableList<String> = mutableListOf("School Year")
+var schoolName: String = ""
+var schoolYear: Int = 0
+var isItNineDays: Boolean = false
 @SuppressLint("NewApi")
 @RequiresApi(Build.VERSION_CODES.O)
-var schoolDays : Array<LocalDate> = Array(2) {LocalDate.of(2000,1,1) }
+var schoolDays: Array<LocalDate> = Array(2) { LocalDate.of(2000, 1, 1) }
 @RequiresApi(Build.VERSION_CODES.O)
-var schoolTimeInfo : Array<LocalTime> = arrayOf(
-    LocalTime.of(8,0,0),
-    LocalTime.of(9,15,0),
-    LocalTime.of(9,23,0),
-    LocalTime.of(10,38,0),
-    LocalTime.of(10,55,0),
-    LocalTime.of(12,10,0),
-    LocalTime.of(13,35,0),
-    LocalTime.of(14,50,0),
-    LocalTime.of(14,50,0),
-    LocalTime.of(14,50,0))
-var selectedHolidayList : Int = 0
+var schoolTimeInfo: Array<LocalTime> = arrayOf(
+    LocalTime.of(8, 0, 0),
+    LocalTime.of(9, 15, 0),
+    LocalTime.of(9, 23, 0),
+    LocalTime.of(10, 38, 0),
+    LocalTime.of(10, 55, 0),
+    LocalTime.of(12, 10, 0),
+    LocalTime.of(13, 35, 0),
+    LocalTime.of(14, 50, 0),
+    LocalTime.of(14, 50, 0),
+    LocalTime.of(14, 50, 0)
+)
+var selectedHolidayList: Int = 0
 
 @RequiresApi(Build.VERSION_CODES.O)
 val stLouisHolidays = mutableListOf(
@@ -130,7 +132,8 @@ val stLouisHolidays = mutableListOf(
     Holiday("Journée verte", LocalDate.of(2020, 5, 27)),
     Holiday("Journée nationale des patriotes", LocalDate.of(2020, 5, 18)),
     Holiday("Journée pédagogique", LocalDate.of(2020, 6, 1)),
-    Holiday("Défi endurance", LocalDate.of(2020, 6, 5)))
+    Holiday("Défi endurance", LocalDate.of(2020, 6, 5))
+)
 
 class MainActivity : AppCompatActivity() {
 
@@ -142,7 +145,8 @@ class MainActivity : AppCompatActivity() {
         defaultHolidayChoices.add(stLouisHolidays)
         defaultHolidayListNames.add("Collège St-Louis")
 
-        val page1Objects = listOf<View>(schoolNameEt,
+        val page1Objects = listOf<View>(
+            schoolNameEt,
             schoolYearSpn,
             nineDaySw,
             mondayBtn,
@@ -166,7 +170,8 @@ class MainActivity : AppCompatActivity() {
             period4spn,
             period5spn,
             next1Btn,
-            confirmChk)
+            confirmChk
+        )
 
         val page2Objects = listOf<View>(
             back1btn,
@@ -209,9 +214,10 @@ class MainActivity : AppCompatActivity() {
         holidayChoiceSpn.adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_dropdown_item,
-            defaultHolidayListNames)
+            defaultHolidayListNames
+        )
         val thisYear = Calendar.getInstance()[Calendar.YEAR]
-        for (i in (1..10)){
+        for (i in (1..10)) {
             schoolYears.add((thisYear - 6 + i).toString().plus(" - ").plus((thisYear - 5 + i).toString()))
         }
         schoolYearSpn.adapter = ArrayAdapter(
@@ -249,19 +255,18 @@ class MainActivity : AppCompatActivity() {
                 }
                 dayButtons[i].isChecked = false
             }
-            if (nineDaySw.isChecked){
+            if (nineDaySw.isChecked) {
                 day1Btn.isChecked = true
                 day = 5
-                for (i in periodSpinners.indices){
-                    val pos : Int = periodNames.indexOf(nineDaySchedule[0].periods[i].className)
+                for (i in periodSpinners.indices) {
+                    val pos: Int = periodNames.indexOf(nineDaySchedule[0].periods[i].className)
                     periodSpinners[i].setSelection(pos)
                 }
-            }
-            else{
+            } else {
                 mondayBtn.isChecked = true
                 day = 0
-                for (i in periodSpinners.indices){
-                    val pos : Int = periodNames.indexOf(weekDaySchedule[0].periods[i].className)
+                for (i in periodSpinners.indices) {
+                    val pos: Int = periodNames.indexOf(weekDaySchedule[0].periods[i].className)
                     periodSpinners[i].setSelection(pos)
                 }
             }
@@ -271,7 +276,7 @@ class MainActivity : AppCompatActivity() {
         for (i in (dayButtons.indices)) {
             if (i < 5) {
                 dayButtons[i].setOnClickListener {
-                    for (o in dayButtons.indices){
+                    for (o in dayButtons.indices) {
                         dayButtons[o].isChecked = false
                     }
                     dayButtons[i].isChecked = true
@@ -359,12 +364,13 @@ class MainActivity : AppCompatActivity() {
                 periodBuilder2.setCancelable(false)
                 periodBuilder2.setMessage("Repeated period name. Replace?")
                 periodBuilder2.setPositiveButton("Replace") { _: DialogInterface, _: Int ->
-                    val pos : Int = periodNames.indexOf(periodName.text.toString())
+                    val pos: Int = periodNames.indexOf(periodName.text.toString())
                     periodTypes[pos] = SchoolPeriod(
                         className = periodName.text.toString(),
                         teacher = teacher.text.toString(),
                         classNumber = classRoom.text.toString(),
-                        groupNumber = groupNumber.text.toString())
+                        groupNumber = groupNumber.text.toString()
+                    )
                     periodDialogView.findViewById<EditText>(R.id.periodNameEt).text.clear()
                     periodDialogView.findViewById<EditText>(R.id.teacherEt).text.clear()
                     periodDialogView.findViewById<EditText>(R.id.classroomRoomEt).text.clear()
@@ -375,7 +381,8 @@ class MainActivity : AppCompatActivity() {
                 periodBuilder.setNegativeButton("Never mind...") { _: DialogInterface, _: Int -> }
                 when {
                     periodName.text.toString() == "" -> {
-                        Toast.makeText(baseContext, "Period name required", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Period name required", Toast.LENGTH_SHORT)
+                            .show()
                     }
                     periodNames.find { it.contains(periodName.text.toString()) } != null -> {
                         periodBuilder2.show()
@@ -404,33 +411,40 @@ class MainActivity : AppCompatActivity() {
         }
         for (i in periodSpinners.indices) {
             periodSpinners[i].onItemSelectedListener = object :
-                AdapterView.OnItemSelectedListener{
+                AdapterView.OnItemSelectedListener {
                 override fun onNothingSelected(parent: AdapterView<*>?) {
-                    val position: Int = if (day < 5) periodNames.indexOf(weekDaySchedule[day].periods[i].className)
-                    else periodNames.indexOf(nineDaySchedule[day - 5].periods[i].className)
+                    val position: Int =
+                        if (day < 5) periodNames.indexOf(weekDaySchedule[day].periods[i].className)
+                        else periodNames.indexOf(nineDaySchedule[day - 5].periods[i].className)
                     periodSpinners[i].setSelection(position)
                 }
 
-                override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    if (day < 5){
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    if (day < 5) {
                         weekDaySchedule[day].periods[i] = periodTypes[position]
-                    }
-                    else{
+                    } else {
                         nineDaySchedule[day - 5].periods[i] = periodTypes[position]
                     }
                 }
             }
         }
-        confirmChk.setOnClickListener{
+        confirmChk.setOnClickListener {
             next1Btn.isEnabled = !next1Btn.isEnabled
         }
-        next1Btn.setOnClickListener{
+        next1Btn.setOnClickListener {
             when {
                 schoolNameEt.text.toString() == "" -> {
-                    Toast.makeText(this, "Please enter a valid school name", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please enter a valid school name", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 schoolYearSpn.selectedItemPosition == 0 -> {
-                    Toast.makeText(this, "Please choose a valid school year", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Please choose a valid school year", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 else -> {
                     schoolName = schoolNameEt.text.toString()
@@ -447,7 +461,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        back1btn.setOnClickListener{
+        back1btn.setOnClickListener {
             selectedHolidayList = holidayChoiceSpn.selectedItemPosition
             page1Objects.indices.forEach {
                 page1Objects[it].visibility = VISIBLE
@@ -457,30 +471,30 @@ class MainActivity : AppCompatActivity() {
             }
             nineDaySw.isChecked = isItNineDays
             day1Btn.visibility = if (!isItNineDays) GONE else VISIBLE
-            day2Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            day3Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            day4Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            day5Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            day6Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            day7Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            day8Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            day9Btn.visibility = if (!isItNineDays)  GONE  else VISIBLE
-            mondayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
-            tuesdayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
-            wednesdayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
-            thursdayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
-            fridayBtn.visibility = if (isItNineDays)  GONE  else VISIBLE
+            day2Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day3Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day4Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day5Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day6Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day7Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day8Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            day9Btn.visibility = if (!isItNineDays) GONE else VISIBLE
+            mondayBtn.visibility = if (isItNineDays) GONE else VISIBLE
+            tuesdayBtn.visibility = if (isItNineDays) GONE else VISIBLE
+            wednesdayBtn.visibility = if (isItNineDays) GONE else VISIBLE
+            thursdayBtn.visibility = if (isItNineDays) GONE else VISIBLE
+            fridayBtn.visibility = if (isItNineDays) GONE else VISIBLE
             if (isItNineDays) day1Btn.performClick() else mondayBtn.performClick()
         }
 
-        addHolidayBtn.setOnClickListener{
+        addHolidayBtn.setOnClickListener {
             Toast.makeText(baseContext, "Coming soon", Toast.LENGTH_SHORT).show()
             //TODO
         }
 
         val holidayToggles = listOf<ToggleButton>(holidayTgb1, holidayTgb2)
-        for (i in holidayToggles.indices){
-            holidayToggles[i].setOnClickListener{
+        for (i in holidayToggles.indices) {
+            holidayToggles[i].setOnClickListener {
                 holidayToggles[i].isChecked = true
                 holidayToggles[if (i == 1) 0 else 1].isChecked = false
             }
@@ -506,14 +520,26 @@ class MainActivity : AppCompatActivity() {
         )
 
         var firstTime = true
-        next2btn.setOnClickListener{
+        next2btn.setOnClickListener {
             when {
                 holidayTgb1.isChecked -> {
-                    Toast.makeText(baseContext, "Custom holiday sets coming soon", Toast.LENGTH_SHORT).show()
-                    Toast.makeText(baseContext, "Please choose a default set of holidays", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext,
+                        "Custom holiday sets coming soon",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    Toast.makeText(
+                        baseContext,
+                        "Please choose a default set of holidays",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 holidayChoiceSpn.selectedItemPosition == 0 -> {
-                    Toast.makeText(baseContext, "Please choose a valid list of holidays", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        baseContext,
+                        "Please choose a valid list of holidays",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
                 else -> {
                     selectedHolidayList = holidayChoiceSpn.selectedItemPosition
@@ -526,8 +552,7 @@ class MainActivity : AppCompatActivity() {
                     if (firstTime) {
                         firstTime = false
 
-                    }
-                    else{
+                    } else {
                         datePickBtns.indices.forEach {
                             datePickBtns[it].text = schoolDays[it].toString()
                         }
@@ -539,7 +564,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val periodTimeBtns : List<TextView> = listOf(
+        val periodTimeBtns: List<TextView> = listOf(
             period1StartBtn,
             period1EndBtn,
             period2StartBtn,
@@ -556,13 +581,13 @@ class MainActivity : AppCompatActivity() {
 
         var pass = true
 
-        next3Btn.setOnClickListener{
+        next3Btn.setOnClickListener {
             periodTimeBtns.indices.forEach {
-                if (periodTimeBtns[it].text.toString() == "" || periodTimeBtns[it].text.toString() == "NOT SET"){
+                if (periodTimeBtns[it].text.toString() == "" || periodTimeBtns[it].text.toString() == "NOT SET") {
                     pass = false
                 }
             }
-            if (pass){
+            if (pass) {
                 val generateCalendarBuilder = AlertDialog.Builder(this)
                 generateCalendarBuilder.setTitle("Continue?")
                 generateCalendarBuilder.setCancelable(false)
@@ -570,18 +595,18 @@ class MainActivity : AppCompatActivity() {
                 generateCalendarBuilder.setPositiveButton("Continue") { _: DialogInterface, _: Int ->
                     createCSV()
                 }
-                generateCalendarBuilder.setNegativeButton("Cancel"){ _: DialogInterface, _: Int ->
+                generateCalendarBuilder.setNegativeButton("Cancel") { _: DialogInterface, _: Int ->
                     pass = false
                 }
                 generateCalendarBuilder.show()
 
-            }
-            else{
-                Toast.makeText(baseContext, "Missing required information", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(baseContext, "Missing required information", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
-        back2Btn.setOnClickListener{
+        back2Btn.setOnClickListener {
             page2Objects.indices.forEach {
                 page2Objects[it].visibility = VISIBLE
             }
@@ -594,16 +619,17 @@ class MainActivity : AppCompatActivity() {
         val todayDate = Calendar.getInstance()
 
         datePickBtns.indices.forEach {
-            val dateSetListener = DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                todayDate.set(Calendar.YEAR, year)
-                todayDate.set(Calendar.MONTH, monthOfYear)
-                todayDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+            val dateSetListener =
+                DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                    todayDate.set(Calendar.YEAR, year)
+                    todayDate.set(Calendar.MONTH, monthOfYear)
+                    todayDate.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-                val myFormat = "EEE, MMM d, yyyy"
-                val sdf = SimpleDateFormat(myFormat, Locale.US)
-                datePickBtns[it].text = sdf.format(todayDate.time)
-                schoolDays[it] = LocalDate.of(year, monthOfYear, dayOfMonth)
-            }
+                    val myFormat = "EEE, MMM d, yyyy"
+                    val sdf = SimpleDateFormat(myFormat, Locale.US)
+                    datePickBtns[it].text = sdf.format(todayDate.time)
+                    schoolDays[it] = LocalDate.of(year, monthOfYear, dayOfMonth)
+                }
             datePickBtns[it].setOnClickListener {
                 DatePickerDialog(
                     this@MainActivity, dateSetListener,
@@ -614,16 +640,22 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        timePickBtns.indices.forEach{ i ->
+        timePickBtns.indices.forEach { i ->
             timePickBtns[i].setOnClickListener {
                 val cal = Calendar.getInstance()
                 val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
                     cal.set(Calendar.HOUR_OF_DAY, hour)
                     cal.set(Calendar.MINUTE, minute)
                     timePickBtns[i].text = SimpleDateFormat("HH:mm").format(cal.time)
-                    schoolTimeInfo[i] = LocalTime.of(hour,minute,0)
+                    schoolTimeInfo[i] = LocalTime.of(hour, minute, 0)
                 }
-                TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), true).show()
+                TimePickerDialog(
+                    this,
+                    timeSetListener,
+                    cal.get(Calendar.HOUR_OF_DAY),
+                    cal.get(Calendar.MINUTE),
+                    true
+                ).show()
             }
         }
     }
@@ -635,7 +667,7 @@ class MainActivity : AppCompatActivity() {
 
         val letDirectory = File(path, "LET")
 
-        if (!letDirectory.exists()){
+        if (!letDirectory.exists()) {
             letDirectory.mkdirs()
         }
 
@@ -646,12 +678,14 @@ class MainActivity : AppCompatActivity() {
 
         for (it in defaultHolidayChoices[selectedHolidayList]) {
             holidayDates.add(it.holidayDate)
-            file.appendText("${it.holidayName}," +
-                    "${it.holidayDate}," +
-                    "${it.holidayDate}," +
-                    "True,,,No school," +
-                    "${schoolName}," +
-                    "False\n")
+            file.appendText(
+                "${it.holidayName}," +
+                        "${it.holidayDate}," +
+                        "${it.holidayDate}," +
+                        "True,,,No school," +
+                        "${schoolName}," +
+                        "False\n"
+            )
         }
 
         var dayCount = schoolDays[0]
@@ -664,22 +698,24 @@ class MainActivity : AppCompatActivity() {
         val DayPeriods = (1..5)
         var iMonth = 0
         var iWeeks = 0
-        var lastDayOfMonth = LocalDate.of(1,1,1)
+        var lastDayOfMonth = LocalDate.of(1, 1, 1)
         var iYear = schoolYear
         var dayOfSchedule = 1
         var periodNumber = 1
 
-        for (asdf in Months){
+        for (asdf in Months) {
             iMonth = asdf
             if (iMonth > 12) iMonth -= 12
-            if (asdf == 12) {iYear = schoolYear + 1}
+            if (asdf == 12) {
+                iYear = schoolYear + 1
+            }
             lastDayOfMonth = LocalDate.of(schoolYear, iMonth + 1, 1).minusDays(1)
-            if (iMonth == firstDay.monthValue){
-                while (dayCount.dayOfMonth <= lastDayOfMonth.dayOfMonth){
-                    if (dayCount.dayOfWeek == DayOfWeek.SUNDAY || dayCount.dayOfWeek == DayOfWeek.SATURDAY){
-                    }
-                    else{
-                        for (edc in DayPeriods){
+
+            if (iMonth == lastDay.monthValue) {
+                while (lastDay.compareTo(dayCount) >= 0) {
+                    if (dayCount.dayOfWeek == DayOfWeek.SUNDAY || dayCount.dayOfWeek == DayOfWeek.SATURDAY) {
+                    } else {
+                        for (edc in DayPeriods) {
                             periodNumber = edc
                             with(nineDaySchedule[dayOfSchedule].periods[periodNumber]) {
                                 file.appendText(
@@ -697,17 +733,31 @@ class MainActivity : AppCompatActivity() {
                     }
                     dayCount = dayCount.plusDays(1)
                     dayCountInt++
-
                 }
-                lastDayOfMonth.dayOfMonth - firstDay.dayOfMonth
-            }
-            else{
-                for (xdlol in Weeks){
-                    iWeeks = xdlol
-                    firstDay.dayOfMonth
+            } else {
+                while (dayCount.dayOfMonth <= lastDayOfMonth.dayOfMonth) {
+                    if (dayCount.dayOfWeek == DayOfWeek.SUNDAY || dayCount.dayOfWeek == DayOfWeek.SATURDAY) {
+                    } else {
+                        for (edc in DayPeriods) {
+                            periodNumber = edc
+                            with(nineDaySchedule[dayOfSchedule].periods[periodNumber]) {
+                                file.appendText(
+                                    className +
+                                            ",$dayCount" +
+                                            ",$dayCount," +
+                                            "False," +
+                                            "${schoolTimeInfo[(periodNumber - 1) * 2]}" +
+                                            ",${schoolTimeInfo[(periodNumber - 1) * 2 + 1]}," +
+                                            "$groupNumber with $teacher,$classNumber," +
+                                            "False\n"
+                                )
+                            }
+                        }
+                    }
+                    dayCount = dayCount.plusDays(1)
+                    dayCountInt++
                 }
             }
-
         }
 
         if (isItNineDays) {
@@ -717,7 +767,7 @@ class MainActivity : AppCompatActivity() {
                         dayCount = dayCount.plusDays(1)
                     }
                     for (periodNumber in (1..5)) {
-                        if (!holidayDates.contains(dayCount)){
+                        if (!holidayDates.contains(dayCount)) {
                             with(nineDaySchedule[it].periods[periodNumber]) {
                                 file.appendText(
                                     className +
@@ -743,16 +793,14 @@ class MainActivity : AppCompatActivity() {
                     break
                 }
             }
-        }
-
-        else {
+        } else {
             while (true) {
                 for (it in weekDaySchedule.indices) {
                     if (dayCount.dayOfWeek == DayOfWeek.SATURDAY || dayCount.dayOfWeek == DayOfWeek.SUNDAY) {
                         dayCount = dayCount.plusDays(1)
                     }
                     for (periodNumber in (1..5)) {
-                        if (!holidayDates.contains(dayCount)){
+                        if (!holidayDates.contains(dayCount)) {
                             with(weekDaySchedule[it].periods[periodNumber]) {
                                 file.appendText(
                                     className +
@@ -782,7 +830,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(baseContext, "CSV file created!", Toast.LENGTH_SHORT).show()
     }
 
-    fun isHoliday(date : LocalDate): Boolean {
+    fun isHoliday(date: LocalDate): Boolean {
         return holidayDates.contains(date)
     }
 }
