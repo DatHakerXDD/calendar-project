@@ -21,7 +21,9 @@ import java.time.LocalTime
 import java.util.*
 import android.widget.TextView
 import android.widget.Button
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
+import java.time.DayOfWeek
 
 
 data class SchoolPeriod(
@@ -79,7 +81,17 @@ var isItNineDays : Boolean = false
 @RequiresApi(Build.VERSION_CODES.O)
 var schoolDays : Array<LocalDate> = Array(2) {LocalDate.of(2000,1,1) }
 @RequiresApi(Build.VERSION_CODES.O)
-var schoolTimeInfo : Array<LocalTime> = Array(10) {LocalTime.of(12,0,0)}
+var schoolTimeInfo : Array<LocalTime> = arrayOf(
+    LocalTime.of(8,0,0),
+    LocalTime.of(9,15,0),
+    LocalTime.of(9,23,0),
+    LocalTime.of(10,38,0),
+    LocalTime.of(10,55,0),
+    LocalTime.of(12,10,0),
+    LocalTime.of(13,35,0),
+    LocalTime.of(14,50,0),
+    LocalTime.of(14,50,0),
+    LocalTime.of(14,50,0))
 var selectedHolidayList : Int = 0
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -127,7 +139,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val file = File(applicationContext.filesDir, "test.txt")
         defaultHolidayChoices.add(stLouisHolidays)
         defaultHolidayListNames.add("Collège St-Louis")
 
@@ -544,6 +555,7 @@ class MainActivity : AppCompatActivity() {
         )
 
         var pass = true
+
         next3Btn.setOnClickListener{
             periodTimeBtns.indices.forEach {
                 if (periodTimeBtns[it].text.toString() == "" || periodTimeBtns[it].text.toString() == "NOT SET"){
@@ -619,54 +631,159 @@ class MainActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.O)
     fun createCSV() {
-        val csvExport = File(applicationContext.filesDir, "CSV_export.txt")
-        
-        with(csvExport) {
-            this.writeText("Subject,Start Date,End Date,All Day Event,Start Time,End Time,Description,Location,Private\n")
-            defaultHolidayChoices[selectedHolidayList].forEach{
-                holidayDates.add(it.holidayDate)
-                this.writeText(it.holidayName + "," + it.holidayDate.toString() + "," + it.holidayDate.toString() + ",True,,No school," + schoolName + ",False\n")
-            }
+        val path = applicationContext.getExternalFilesDir(null)
 
-            var dayCount = schoolDays[0]
-            var dayCountInt = 0
-            val firstDay = schoolDays[0]
-            val lastDay = schoolDays[1]
+        val letDirectory = File(path, "LET")
 
-            if (isItNineDays){
-                while (true) {
-                    nineDaySchedule.indices.forEach {
-                        for (periodNumber in (1..5)) {
+        if (!letDirectory.exists()){
+            letDirectory.mkdirs()
+        }
 
-                            if (dayCount.dayOfWeek == LocalDate.of(
-                                    2020,
-                                    2,
-                                    22
-                                ).dayOfWeek || dayCount.dayOfWeek == LocalDate.of(
-                                    2020,
-                                    2,
-                                    23
-                                ).dayOfWeek
-                            ) {
-                                dayCount = dayCount.plusDays(1)
-                            }
-                            else{
-                                with(nineDaySchedule[it].periods[periodNumber]) {
-                                    csvExport.writeText("$className,$dayCount,$dayCount,False,${schoolTimeInfo[(it - 1) * 2]},${schoolTimeInfo[(it - 1) * 2 + 1]},$groupNumber with $teacher,$classNumber,False\n")
-                                }
-                                dayCountInt++
-                                dayCount.plusDays(1)
-                            }
+        val file = File(letDirectory, "test.txt")
 
-                            if (dayCount == lastDay || firstDay.plusDays(dayCountInt.toLong()) == lastDay || dayCountInt > 250){
-                                break
+        file.writeText("")
+        file.appendText("Subject,Start Date,End Date,All Day Event,Start Time,End Time,Description,Location,Private\n")
+
+        for (it in defaultHolidayChoices[selectedHolidayList]) {
+            holidayDates.add(it.holidayDate)
+            file.appendText("${it.holidayName}," +
+                    "${it.holidayDate}," +
+                    "${it.holidayDate}," +
+                    "True,,,No school," +
+                    "${schoolName}," +
+                    "False\n")
+        }
+
+        var dayCount = schoolDays[0]
+        var dayCountInt = 0
+        val firstDay = schoolDays[0]
+        val lastDay = schoolDays[1]
+
+        val Months = (firstDay.monthValue..(firstDay.monthValue + 10))
+        val Weeks = (1..4)
+        val DayPeriods = (1..5)
+        var iMonth = 0
+        var iWeeks = 0
+        var lastDayOfMonth = LocalDate.of(1,1,1)
+        var iYear = schoolYear
+        var dayOfSchedule = 1
+        var periodNumber = 1
+
+        for (asdf in Months){
+            iMonth = asdf
+            if (iMonth > 12) iMonth -= 12
+            if (asdf == 12) {iYear = schoolYear + 1}
+            lastDayOfMonth = LocalDate.of(schoolYear, iMonth + 1, 1).minusDays(1)
+            if (iMonth == firstDay.monthValue){
+                while (dayCount.dayOfMonth <= lastDayOfMonth.dayOfMonth){
+                    if (dayCount.dayOfWeek == DayOfWeek.SUNDAY || dayCount.dayOfWeek == DayOfWeek.SATURDAY){
+                    }
+                    else{
+                        for (edc in DayPeriods){
+                            periodNumber = edc
+                            with(nineDaySchedule[dayOfSchedule].periods[periodNumber]) {
+                                file.appendText(
+                                    className +
+                                            ",$dayCount" +
+                                            ",$dayCount," +
+                                            "False," +
+                                            "${schoolTimeInfo[(periodNumber - 1) * 2]}" +
+                                            ",${schoolTimeInfo[(periodNumber - 1) * 2 + 1]}," +
+                                            "$groupNumber with $teacher,$classNumber," +
+                                            "False\n"
+                                )
                             }
                         }
                     }
+                    dayCount = dayCount.plusDays(1)
+                    dayCountInt++
+
+                }
+                lastDayOfMonth.dayOfMonth - firstDay.dayOfMonth
+            }
+            else{
+                for (xdlol in Weeks){
+                    iWeeks = xdlol
+                    firstDay.dayOfMonth
+                }
+            }
+
+        }
+
+        if (isItNineDays) {
+            while (true) {
+                for (it in nineDaySchedule.indices) {
+                    if (dayCount.dayOfWeek == DayOfWeek.SATURDAY || dayCount.dayOfWeek == DayOfWeek.SUNDAY) {
+                        dayCount = dayCount.plusDays(1)
+                    }
+                    for (periodNumber in (1..5)) {
+                        if (!holidayDates.contains(dayCount)){
+                            with(nineDaySchedule[it].periods[periodNumber]) {
+                                file.appendText(
+                                    className +
+                                            ",$dayCount" +
+                                            ",$dayCount," +
+                                            "False," +
+                                            "${schoolTimeInfo[(periodNumber - 1) * 2]}" +
+                                            ",${schoolTimeInfo[(periodNumber - 1) * 2 + 1]}," +
+                                            "$groupNumber with $teacher,$classNumber," +
+                                            "False\n"
+                                )
+                            }
+                        }
+                    }
+                    dayCountInt++
+                    dayCount.plusDays(1)
+                    if (dayCount == lastDay || firstDay.plusDays(dayCountInt.toLong()) == lastDay || dayCountInt > 250) {
+                        break
+                    }
+                }
+
+                if (dayCount == lastDay || firstDay.plusDays(dayCountInt.toLong()) == lastDay || dayCountInt > 250) {
+                    break
                 }
             }
         }
-        // TODO Toast.makeText(baseContext, "CSV file created!", Toast.LENGTH_SHORT).show()
+
+        else {
+            while (true) {
+                for (it in weekDaySchedule.indices) {
+                    if (dayCount.dayOfWeek == DayOfWeek.SATURDAY || dayCount.dayOfWeek == DayOfWeek.SUNDAY) {
+                        dayCount = dayCount.plusDays(1)
+                    }
+                    for (periodNumber in (1..5)) {
+                        if (!holidayDates.contains(dayCount)){
+                            with(weekDaySchedule[it].periods[periodNumber]) {
+                                file.appendText(
+                                    className +
+                                            ",$dayCount" +
+                                            ",$dayCount," +
+                                            "False," +
+                                            "${schoolTimeInfo[(periodNumber - 1) * 2]}" +
+                                            ",${schoolTimeInfo[(periodNumber - 1) * 2 + 1]}," +
+                                            "$groupNumber with $teacher,$classNumber," +
+                                            "False\n"
+                                )
+                            }
+                        }
+                    }
+                    dayCountInt++
+                    dayCount.plusDays(1)
+                    if (dayCount == lastDay || firstDay.plusDays(dayCountInt.toLong()) == lastDay || dayCountInt > 250) {
+                        break
+                    }
+                }
+
+                if (dayCount == lastDay || firstDay.plusDays(dayCountInt.toLong()) == lastDay || dayCountInt > 250) {
+                    break
+                }
+            }
+        }
+        Toast.makeText(baseContext, "CSV file created!", Toast.LENGTH_SHORT).show()
+    }
+
+    fun isHoliday(date : LocalDate): Boolean {
+        return holidayDates.contains(date)
     }
 }
 
