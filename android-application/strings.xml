@@ -48,4 +48,5 @@
     <string name="school_start_text">First day of school</string>
     <string name="school_end_text">Last day of school</string>
     <string name="period_time_edittext_hint">hh:mm:ss</string>
+    <string name="period_button_initial_text">Time</string>
 </resources>
